@@ -149,6 +149,30 @@ function splitAmount(net: number, parts: number): number[] {
   return amounts;
 }
 
+/**
+ * Allocates `total` across `weights.length` buckets, proportionally to each
+ * weight, so the allocations sum EXACTLY to `total` (rounded to paise).
+ *
+ * Used to split a split-payment order's single order-level fee/tax across
+ * its settlement legs in proportion to each leg's amount - rather than
+ * recomputing 2%/18% independently on each leg's own (already-net) partial
+ * amount, which would not sum back to the order's real fee/tax and would
+ * break the amount <-> fee/tax reconciliation the matching pipeline's
+ * split-payment detector (Stage 3) depends on.
+ */
+function allocateProportionally(total: number, weights: number[]): number[] {
+  const weightSum = weights.reduce((sum, w) => sum + w, 0);
+  const allocations: number[] = [];
+  let remaining = total;
+  for (let i = 0; i < weights.length - 1; i++) {
+    const share = weightSum === 0 ? 0 : round2((weights[i] / weightSum) * total);
+    allocations.push(share);
+    remaining = round2(remaining - share);
+  }
+  allocations.push(remaining);
+  return allocations;
+}
+
 // ---------------------------------------------------------------------------
 // Settlement record builder
 // ---------------------------------------------------------------------------
@@ -302,6 +326,13 @@ async function seed(): Promise<void> {
     database: config.db.database,
   });
 
+  // This script is meant to be re-runnable from a clean slate: clear out any
+  // previously-seeded rows first so re-running it replaces the dataset
+  // instead of silently duplicating it on top of what's already there.
+  console.log('Clearing previously-seeded data from ingested_settlements and ledger_orders...');
+  await pool.query('TRUNCATE TABLE ingested_settlements');
+  await pool.query('TRUNCATE TABLE ledger_orders');
+
   const groundTruth: GroundTruthEntry[] = [];
   const counts: Record<Category, number> = {
     CLEAN_EXACT: 0,
@@ -366,14 +397,17 @@ async function seed(): Promise<void> {
 
       case 'SPLIT_PAYMENT': {
         // Split the net settlement amount (post-fee/tax) into `parts` legs that sum
-        // exactly to netAmount. Each leg reports its own proportional fee/tax so the
-        // settlement records look realistic; only the amounts need to reconcile.
+        // exactly to netAmount, and allocate the ONE order-level fee/tax across those
+        // same legs proportionally to each leg's amount - not recomputed per-leg from
+        // scratch, which would not sum back to the order's real fee/tax. This keeps
+        // sum(legAmount) + sum(legFee) + sum(legTax) === expectedAmount exactly, which
+        // is what the split-payment detector's exact subset-sum check relies on.
         const parts = task.splitParts ?? 2;
         const amounts = splitAmount(netAmount, parts);
-        for (const partAmount of amounts) {
-          const partFee = round2(partAmount * 0.02);
-          const partTax = round2(partFee * 0.18);
-          const settlement = buildSettlement({ orderId, amount: partAmount, fee: partFee, tax: partTax });
+        const legFees = allocateProportionally(fee, amounts);
+        const legTaxes = allocateProportionally(tax, amounts);
+        for (let i = 0; i < amounts.length; i++) {
+          const settlement = buildSettlement({ orderId, amount: amounts[i], fee: legFees[i], tax: legTaxes[i] });
           await insertSettlement(pool, settlement);
           groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
         }
