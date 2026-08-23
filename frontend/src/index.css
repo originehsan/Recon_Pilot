@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ReconPilot Design System — CSS Custom Properties
+   ============================================================
+   All color, spacing, and typography tokens are defined here.
+   These are consumed by Tailwind utilities and raw CSS classes.
+   ============================================================ */
+
+:root {
+  /* Base palette — dark, professional fintech */
+  --color-bg-base:       #0B0F14;
+  --color-bg-surface:    #131922;
+  --color-bg-elevated:   #1A2230;
+  --color-border:        #232B36;
+  --color-border-subtle: #1C2432;
+
+  /* Text */
+  --color-text-primary:   #E8ECF1;
+  --color-text-secondary: #8B96A5;
+  --color-text-muted:     #5A6578;
+
+  /* Functional accent colors — FIXED semantic meaning, never decorative */
+  /* Teal  = Deterministic / stage1_exact / stage7_auto — no AI involved */
+  --color-teal:        #14B8A6;
+  --color-teal-dim:    rgba(20, 184, 166, 0.12);
+  --color-teal-border: rgba(20, 184, 166, 0.25);
+
+  /* Purple = AI-Assisted / post_ai / ai_investigation */
+  --color-purple:        #A78BFA;
+  --color-purple-dim:    rgba(167, 139, 250, 0.12);
+  --color-purple-border: rgba(167, 139, 250, 0.25);
+
+  /* Amber  = Human / pending review / human-review items */
+  --color-amber:        #F59E0B;
+  --color-amber-dim:    rgba(245, 158, 11, 0.12);
+  --color-amber-border: rgba(245, 158, 11, 0.25);
+
+  /* Red    = Failed / rejected / error states only */
+  --color-red:        #F87171;
+  --color-red-dim:    rgba(248, 113, 113, 0.12);
+  --color-red-border: rgba(248, 113, 113, 0.25);
+
+  /* Gray   = Neutral / unresolved / default */
+  --color-gray:        #6B7280;
+  --color-gray-dim:    rgba(107, 114, 128, 0.12);
+  --color-gray-border: rgba(107, 114, 128, 0.25);
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+}
+
+/* ============================================================
+   Global Reset & Base Styles
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Scrollbar Styling
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2D3B4E;
+}
+
+/* ============================================================
+   Tailwind @theme — extend with our design tokens
+   ============================================================ */
+
+@theme {
+  --color-bg-base:     #0B0F14;
+  --color-bg-surface:  #131922;
+  --color-bg-elevated: #1A2230;
+  --color-border-dim:  #232B36;
+
+  --color-teal:   #14B8A6;
+  --color-purple: #A78BFA;
+  --color-amber:  #F59E0B;
+  --color-red:    #F87171;
+  --color-gray:   #6B7280;
+
+  --color-text-primary:   #E8ECF1;
+  --color-text-secondary: #8B96A5;
+  --color-text-muted:     #5A6578;
+}
+
+/* ============================================================
+   Utility Classes (used across multiple components)
+   ============================================================ */
+
+/* Card shell — dark surface, subtle border, no heavy shadows */
+.card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+/* Monospace blocks for JSON / numeric values */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+/* Section header style */
+.section-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   Transition defaults
+   ============================================================ */
+
+.transition-default {
+  transition: all 150ms ease;
+}
