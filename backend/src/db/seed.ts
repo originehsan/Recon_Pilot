@@ -149,6 +149,41 @@ function splitAmount(net: number, parts: number): number[] {
   return amounts;
 }
 
+function randomFrom<T>(pool: T[]): T {
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// Free-text narration pools for AMBIGUOUS_DUPLICATE and SPLIT_PAYMENT
+// settlements only (see 002_add_settlement_narration.sql) - genuine
+// unstructured evidence for the AI investigation layer to reason over.
+// Every other category leaves narration null.
+
+// For an ambiguous-duplicate pair, exactly one settlement is randomly
+// designated "genuine" and gets a confirming narration; the other is
+// "spurious" and gets a narration implying uncertainty/duplication. This is
+// the only signal distinguishing the two - amount, order_id, and category
+// are identical by construction.
+const GENUINE_DUPLICATE_NARRATIONS = [
+  'Payment confirmed by gateway callback; single settlement recorded for this order.',
+  'Original transaction cleared successfully; no resubmission required.',
+  'Settlement matches the sole confirmed payment attempt for this order.',
+];
+
+const SPURIOUS_DUPLICATE_NARRATIONS = [
+  'Retry after gateway timeout, original attempt unconfirmed.',
+  'Manual resubmission per customer request; verify against original before crediting.',
+  'Duplicate settlement flagged by risk review, pending confirmation.',
+];
+
+/** Every leg of a split payment is genuinely correct - narration just states its position. */
+function splitLegNarration(legIndex: number, totalLegs: number): string {
+  const legNumber = legIndex + 1;
+  if (legNumber === totalLegs) {
+    return `Final partial payment ${legNumber} of ${totalLegs}; order now fully settled.`;
+  }
+  return `Partial payment ${legNumber} of ${totalLegs}, remainder follows.`;
+}
+
 /**
  * Allocates `total` across `weights.length` buckets, proportionally to each
  * weight, so the allocations sum EXACTLY to `total` (rounded to paise).
@@ -191,6 +226,7 @@ interface SettlementRecord {
   on_hold: boolean;
   dispute_id: string | null;
   credit_type: string;
+  narration: string | null;
   raw_payload: Record<string, unknown>;
   content_hash: string;
   idempotency_key: string;
@@ -203,6 +239,7 @@ function buildSettlement(params: {
   tax: number;
   onHold?: boolean;
   disputeId?: string | null;
+  narration?: string | null;
 }): SettlementRecord {
   const paymentId = randomId('pay_');
   const entityId = paymentId; // mirrors the underlying payment entity id, as in real Razorpay recon rows
@@ -210,6 +247,7 @@ function buildSettlement(params: {
   const settlementUtr = randomUtr();
   const onHold = params.onHold ?? false;
   const disputeId = params.disputeId ?? null;
+  const narration = params.narration ?? null;
 
   const rawPayload = {
     entity_id: entityId,
@@ -244,6 +282,7 @@ function buildSettlement(params: {
     on_hold: onHold,
     dispute_id: disputeId,
     credit_type: 'default',
+    narration,
     raw_payload: rawPayload,
     content_hash: contentHash,
     idempotency_key: crypto.randomUUID(),
@@ -254,8 +293,8 @@ async function insertSettlement(pool: mysql.Pool, s: SettlementRecord): Promise<
   await pool.query(
     `INSERT INTO ingested_settlements
       (batch_id, entity_id, type, settlement_id, settlement_utr, order_id, payment_id,
-       amount, fee, tax, on_hold, dispute_id, credit_type, raw_payload, content_hash, idempotency_key)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       amount, fee, tax, on_hold, dispute_id, credit_type, narration, raw_payload, content_hash, idempotency_key)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       s.batch_id,
       s.entity_id,
@@ -270,6 +309,7 @@ async function insertSettlement(pool: mysql.Pool, s: SettlementRecord): Promise<
       s.on_hold,
       s.dispute_id,
       s.credit_type,
+      s.narration,
       JSON.stringify(s.raw_payload),
       s.content_hash,
       s.idempotency_key,
@@ -285,6 +325,14 @@ interface GroundTruthEntry {
   entity_id: string | null;
   order_id: string;
   category: Category;
+  // The narration text actually stored on this settlement (null for every
+  // category except AMBIGUOUS_DUPLICATE and SPLIT_PAYMENT).
+  narration: string | null;
+  // AMBIGUOUS_DUPLICATE only: true for the settlement randomly designated
+  // "genuine" (the one that should be selected), false for the "spurious"
+  // duplicate. null for every other category - split-payment legs are all
+  // genuinely correct, so "true vs false" doesn't apply to them.
+  isTrueCandidate: boolean | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -371,7 +419,13 @@ async function seed(): Promise<void> {
       case 'CLEAN_EXACT': {
         const settlement = buildSettlement({ orderId, amount: netAmount, fee, tax });
         await insertSettlement(pool, settlement);
-        groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
+        groundTruth.push({
+          entity_id: settlement.entity_id,
+          order_id: orderId,
+          category: task.category,
+          narration: null,
+          isTrueCandidate: null,
+        });
         counts.CLEAN_EXACT++;
         break;
       }
@@ -381,7 +435,13 @@ async function seed(): Promise<void> {
         const settlement = buildSettlement({ orderId: corruptedOrderId, amount: netAmount, fee, tax });
         await insertSettlement(pool, settlement);
         // Ground truth records the correct order_id so evaluation can check recovery.
-        groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
+        groundTruth.push({
+          entity_id: settlement.entity_id,
+          order_id: orderId,
+          category: task.category,
+          narration: null,
+          isTrueCandidate: null,
+        });
         counts.CORRUPTED_TRUNCATED++;
         break;
       }
@@ -390,7 +450,13 @@ async function seed(): Promise<void> {
         const corruptedOrderId = substituteOrderId(orderId);
         const settlement = buildSettlement({ orderId: corruptedOrderId, amount: netAmount, fee, tax });
         await insertSettlement(pool, settlement);
-        groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
+        groundTruth.push({
+          entity_id: settlement.entity_id,
+          order_id: orderId,
+          category: task.category,
+          narration: null,
+          isTrueCandidate: null,
+        });
         counts.CORRUPTED_SUBSTITUTED++;
         break;
       }
@@ -407,19 +473,46 @@ async function seed(): Promise<void> {
         const legFees = allocateProportionally(fee, amounts);
         const legTaxes = allocateProportionally(tax, amounts);
         for (let i = 0; i < amounts.length; i++) {
-          const settlement = buildSettlement({ orderId, amount: amounts[i], fee: legFees[i], tax: legTaxes[i] });
+          const narration = splitLegNarration(i, amounts.length);
+          const settlement = buildSettlement({
+            orderId,
+            amount: amounts[i],
+            fee: legFees[i],
+            tax: legTaxes[i],
+            narration,
+          });
           await insertSettlement(pool, settlement);
-          groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
+          groundTruth.push({
+            entity_id: settlement.entity_id,
+            order_id: orderId,
+            category: task.category,
+            narration,
+            isTrueCandidate: null, // not applicable - every leg of a split payment is genuinely correct
+          });
         }
         counts.SPLIT_PAYMENT++;
         break;
       }
 
       case 'AMBIGUOUS_DUPLICATE': {
+        // Randomly designate one of the two tied settlements as the genuine
+        // payment and the other as the spurious duplicate. Narration is the
+        // only signal that distinguishes them - amount, order_id, and
+        // category are identical by construction - which is exactly what
+        // makes it useful evidence for the AI investigation layer.
+        const genuineIndex = Math.random() < 0.5 ? 0 : 1;
         for (let i = 0; i < 2; i++) {
-          const settlement = buildSettlement({ orderId, amount: netAmount, fee, tax });
+          const isGenuine = i === genuineIndex;
+          const narration = randomFrom(isGenuine ? GENUINE_DUPLICATE_NARRATIONS : SPURIOUS_DUPLICATE_NARRATIONS);
+          const settlement = buildSettlement({ orderId, amount: netAmount, fee, tax, narration });
           await insertSettlement(pool, settlement);
-          groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
+          groundTruth.push({
+            entity_id: settlement.entity_id,
+            order_id: orderId,
+            category: task.category,
+            narration,
+            isTrueCandidate: isGenuine,
+          });
         }
         counts.AMBIGUOUS_DUPLICATE++;
         break;
@@ -427,7 +520,13 @@ async function seed(): Promise<void> {
 
       case 'UNMATCHED': {
         // No settlement record at all.
-        groundTruth.push({ entity_id: null, order_id: orderId, category: task.category });
+        groundTruth.push({
+          entity_id: null,
+          order_id: orderId,
+          category: task.category,
+          narration: null,
+          isTrueCandidate: null,
+        });
         counts.UNMATCHED++;
         break;
       }
@@ -443,7 +542,13 @@ async function seed(): Promise<void> {
           disputeId,
         });
         await insertSettlement(pool, settlement);
-        groundTruth.push({ entity_id: settlement.entity_id, order_id: orderId, category: task.category });
+        groundTruth.push({
+          entity_id: settlement.entity_id,
+          order_id: orderId,
+          category: task.category,
+          narration: null,
+          isTrueCandidate: null,
+        });
         counts.ON_HOLD++;
         break;
       }

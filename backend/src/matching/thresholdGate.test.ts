@@ -6,7 +6,18 @@ import { AssignmentResult } from './hungarianAssignment';
 import { Thresholds } from './calibrateThresholds';
 
 function makeSettlement(id: number, orderId?: string): Settlement {
-  return { id, entityId: `pay_${id}`, orderId: orderId ?? `order_${id}`, amount: 100, fee: 0, tax: 0, settlementUtr: null };
+  return {
+    id,
+    entityId: `pay_${id}`,
+    orderId: orderId ?? `order_${id}`,
+    amount: 100,
+    fee: 0,
+    tax: 0,
+    settlementUtr: null,
+    creditType: null,
+    hasDispute: false,
+    narration: null,
+  };
 }
 function makeOrder(id: number, orderId?: string): LedgerOrder {
   return { id, orderId: orderId ?? `order_${id}`, expectedAmount: 100, expectedDate: null };

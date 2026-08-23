@@ -17,6 +17,13 @@ export interface GroundTruthEntry {
   entity_id: string | null;
   order_id: string;
   category: string;
+  // The narration text actually stored on this settlement (null except for
+  // AMBIGUOUS_DUPLICATE and SPLIT_PAYMENT - see seed.ts).
+  narration: string | null;
+  // AMBIGUOUS_DUPLICATE only: true for the settlement randomly designated
+  // "genuine" (the one a reviewer/AI should select), false for the
+  // "spurious" duplicate. null for every other category.
+  isTrueCandidate: boolean | null;
 }
 
 const GROUND_TRUTH_PATH = path.join(__dirname, '..', 'db', 'ground-truth.json');

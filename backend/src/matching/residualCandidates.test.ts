@@ -4,8 +4,30 @@ import { LedgerOrder, Settlement } from './types';
 
 describe('generateResidualCandidates', () => {
   const settlements: Settlement[] = [
-    { id: 1, entityId: 'pay_1', orderId: 'order_TRUNC1', amount: 9882, fee: 100, tax: 18, settlementUtr: null },
-    { id: 2, entityId: 'pay_2', orderId: 'order_TRUNC2', amount: 5000, fee: 50, tax: 9, settlementUtr: null },
+    {
+      id: 1,
+      entityId: 'pay_1',
+      orderId: 'order_TRUNC1',
+      amount: 9882,
+      fee: 100,
+      tax: 18,
+      settlementUtr: null,
+      creditType: null,
+      hasDispute: false,
+      narration: null,
+    },
+    {
+      id: 2,
+      entityId: 'pay_2',
+      orderId: 'order_TRUNC2',
+      amount: 5000,
+      fee: 50,
+      tax: 9,
+      settlementUtr: null,
+      creditType: null,
+      hasDispute: false,
+      narration: null,
+    },
   ];
 
   const orders: LedgerOrder[] = [

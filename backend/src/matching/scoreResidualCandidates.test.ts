@@ -11,6 +11,9 @@ function makeCandidate(settlementOrderId: string, orderOrderId: string): Candida
     fee: 0,
     tax: 0,
     settlementUtr: null,
+    creditType: null,
+    hasDispute: false,
+    narration: null,
   };
   const order: LedgerOrder = { id: 1, orderId: orderOrderId, expectedAmount: 100, expectedDate: null };
 

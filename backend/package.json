@@ -11,7 +11,8 @@
     "seed": "ts-node src/db/seed.ts",
     "test": "vitest run",
     "verify-matching": "ts-node src/matching/manualVerify.ts",
-    "verify-pipeline": "ts-node src/matching/verifyFullPipeline.ts"
+    "verify-pipeline": "ts-node src/matching/verifyFullPipeline.ts",
+    "verify-ai": "ts-node src/aiInvestigation/manualVerify.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

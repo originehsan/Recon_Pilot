@@ -13,6 +13,9 @@ interface SettlementRow extends mysql.RowDataPacket {
   fee: string;
   tax: string;
   settlement_utr: string | null;
+  credit_type: string | null;
+  dispute_id: string | null;
+  narration: string | null;
 }
 
 interface LedgerOrderRow extends mysql.RowDataPacket {
@@ -50,7 +53,7 @@ export async function loadSettlementsAndOrders(): Promise<{ settlements: Settlem
 
   try {
     const [settlementRows] = await pool.query<SettlementRow[]>(
-      `SELECT id, entity_id, order_id, amount, fee, tax, settlement_utr
+      `SELECT id, entity_id, order_id, amount, fee, tax, settlement_utr, credit_type, dispute_id, narration
        FROM ingested_settlements
        WHERE order_id IS NOT NULL`,
     );
@@ -68,6 +71,9 @@ export async function loadSettlementsAndOrders(): Promise<{ settlements: Settlem
       fee: decimalStringToInt(row.fee),
       tax: decimalStringToInt(row.tax),
       settlementUtr: row.settlement_utr,
+      creditType: row.credit_type,
+      hasDispute: row.dispute_id !== null,
+      narration: row.narration,
     }));
 
     const orders: LedgerOrder[] = orderRows.map((row) => ({

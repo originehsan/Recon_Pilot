@@ -9,7 +9,16 @@ function makeOrder(overrides: Partial<LedgerOrder> & { id: number; orderId: stri
 function makeSettlement(
   overrides: Partial<Settlement> & { id: number; orderId: string; amount: number },
 ): Settlement {
-  return { entityId: `pay_entity_${overrides.id}`, fee: 0, tax: 0, settlementUtr: null, ...overrides };
+  return {
+    entityId: `pay_entity_${overrides.id}`,
+    fee: 0,
+    tax: 0,
+    settlementUtr: null,
+    creditType: null,
+    hasDispute: false,
+    narration: null,
+    ...overrides,
+  };
 }
 
 describe('runExactMatch', () => {

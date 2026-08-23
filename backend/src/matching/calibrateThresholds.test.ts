@@ -5,7 +5,18 @@ import { FSParameters } from './fellegiSunter';
 import { LedgerOrder, Settlement } from './types';
 
 function makeSettlement(id: number): Settlement {
-  return { id, entityId: `pay_${id}`, orderId: `order_${id}`, amount: 100, fee: 0, tax: 0, settlementUtr: null };
+  return {
+    id,
+    entityId: `pay_${id}`,
+    orderId: `order_${id}`,
+    amount: 100,
+    fee: 0,
+    tax: 0,
+    settlementUtr: null,
+    creditType: null,
+    hasDispute: false,
+    narration: null,
+  };
 }
 function makeOrder(id: number): LedgerOrder {
   return { id, orderId: `order_${id}`, expectedAmount: 100, expectedDate: null };

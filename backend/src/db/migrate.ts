@@ -2,21 +2,30 @@
 //
 //   npm run migrate
 //
-// Reads 001_initial_schema.sql and executes it against the configured
-// MySQL database, printing clear success/failure output.
+// Runs every *.sql file in migrations/, in filename-sorted order, against
+// the configured MySQL database, printing clear success/failure output.
+// Migrations are meant to run once each; re-running a migration that isn't
+// itself idempotent (e.g. an ALTER TABLE ADD COLUMN) will fail loudly rather
+// than silently - that's a legitimate, clearly-reported signal that it was
+// already applied, not a bug.
 
 import fs from 'fs';
 import path from 'path';
 import mysql from 'mysql2/promise';
 import { config } from '../config';
 
-const MIGRATION_FILE = path.join(__dirname, 'migrations', '001_initial_schema.sql');
+const MIGRATIONS_DIR = path.join(__dirname, 'migrations');
 
 async function migrate(): Promise<void> {
-  console.log(`Reading migration file: ${MIGRATION_FILE}`);
-  const sql = fs.readFileSync(MIGRATION_FILE, 'utf-8');
+  const migrationFiles = fs
+    .readdirSync(MIGRATIONS_DIR)
+    .filter((file) => file.endsWith('.sql'))
+    .sort();
 
-  console.log(`Connecting to MySQL at ${config.db.host} (database: ${config.db.database})...`);
+  console.log(`Found ${migrationFiles.length} migration file(s) in ${MIGRATIONS_DIR}:`);
+  for (const file of migrationFiles) console.log(`  - ${file}`);
+
+  console.log(`\nConnecting to MySQL at ${config.db.host} (database: ${config.db.database})...`);
   const connection = await mysql.createConnection({
     host: config.db.host,
     user: config.db.user,
@@ -26,11 +35,15 @@ async function migrate(): Promise<void> {
   });
 
   try {
-    console.log('Running migration: 001_initial_schema.sql ...');
-    await connection.query(sql);
+    for (const file of migrationFiles) {
+      const sql = fs.readFileSync(path.join(MIGRATIONS_DIR, file), 'utf-8');
+      console.log(`\nRunning migration: ${file} ...`);
+      await connection.query(sql);
+      console.log(`✅ ${file} applied.`);
+    }
 
     const [tables] = await connection.query<mysql.RowDataPacket[]>('SHOW TABLES');
-    console.log('✅ Migration completed successfully.');
+    console.log('\n✅ All migrations completed successfully.');
     console.log(`   ${tables.length} table(s) present in database '${config.db.database}':`);
     for (const row of tables) {
       console.log(`   - ${Object.values(row)[0]}`);

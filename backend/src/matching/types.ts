@@ -10,6 +10,9 @@ export interface Settlement {
   fee: number;
   tax: number;
   settlementUtr: string | null;
+  creditType: string | null;
+  hasDispute: boolean;
+  narration: string | null;
 }
 
 export interface LedgerOrder {

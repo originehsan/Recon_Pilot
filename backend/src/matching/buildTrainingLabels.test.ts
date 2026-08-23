@@ -4,7 +4,18 @@ import { GroundTruthEntry } from './groundTruth';
 import { CandidatePair, LedgerOrder, Settlement } from './types';
 
 function makeSettlement(id: number, entityId: string, orderId: string): Settlement {
-  return { id, entityId, orderId, amount: 100, fee: 0, tax: 0, settlementUtr: null };
+  return {
+    id,
+    entityId,
+    orderId,
+    amount: 100,
+    fee: 0,
+    tax: 0,
+    settlementUtr: null,
+    creditType: null,
+    hasDispute: false,
+    narration: null,
+  };
 }
 
 function makeOrder(id: number, orderId: string): LedgerOrder {
@@ -17,8 +28,8 @@ function makeCandidate(settlement: Settlement, order: LedgerOrder): CandidatePai
 
 describe('labelResidualCandidates', () => {
   const groundTruth: GroundTruthEntry[] = [
-    { entity_id: 'pay_1', order_id: 'order_A', category: 'CORRUPTED_TRUNCATED' },
-    { entity_id: 'pay_2', order_id: 'order_B', category: 'CORRUPTED_SUBSTITUTED' },
+    { entity_id: 'pay_1', order_id: 'order_A', category: 'CORRUPTED_TRUNCATED', narration: null, isTrueCandidate: null },
+    { entity_id: 'pay_2', order_id: 'order_B', category: 'CORRUPTED_SUBSTITUTED', narration: null, isTrueCandidate: null },
   ];
 
   const orderA = makeOrder(1, 'order_A');

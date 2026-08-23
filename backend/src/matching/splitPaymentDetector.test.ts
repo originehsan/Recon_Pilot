@@ -3,7 +3,18 @@ import { detectSplitPayments } from './splitPaymentDetector';
 import { LedgerOrder, Settlement } from './types';
 
 function makeSettlement(id: number, orderId: string, amount: number): Settlement {
-  return { id, entityId: `pay_${id}`, orderId, amount, fee: 0, tax: 0, settlementUtr: null };
+  return {
+    id,
+    entityId: `pay_${id}`,
+    orderId,
+    amount,
+    fee: 0,
+    tax: 0,
+    settlementUtr: null,
+    creditType: null,
+    hasDispute: false,
+    narration: null,
+  };
 }
 
 function makeOrder(id: number, orderId: string, expectedAmount: number): LedgerOrder {
