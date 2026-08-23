@@ -301,7 +301,7 @@ export function Dashboard() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-5">
 
       {/* Page header */}
       <div className="flex items-start justify-between">
@@ -319,7 +319,7 @@ export function Dashboard() {
       </div>
 
       {/* ── Section A: Batch Upload ──────────────────────────────────────── */}
-      <div className="card overflow-hidden">
+      <div className="card card-hover overflow-hidden">
         <button
           className="w-full flex items-center justify-between px-5 py-4 transition-default"
           style={{ color: 'var(--color-text-primary)' }}
@@ -364,12 +364,13 @@ export function Dashboard() {
               value={batchJson}
               onChange={(e) => setBatchJson(e.target.value)}
               rows={12}
-              className="mono text-xs w-full p-3 rounded-lg resize-y"
+              className="mono text-xs w-full p-3 rounded resize-y"
               style={{
                 background: 'var(--color-bg-base)',
                 border: '1px solid var(--color-border)',
                 color: 'var(--color-text-primary)',
                 outline: 'none',
+                fontFamily: 'var(--font-mono)',
               }}
               spellCheck={false}
             />
@@ -393,7 +394,7 @@ export function Dashboard() {
               <button
                 onClick={handleBatchUpload}
                 disabled={batchLoading}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-50"
                 style={{
                   background: 'var(--color-brand)',
                   color: '#0B0F14',
@@ -432,7 +433,7 @@ export function Dashboard() {
           id="start-run-btn"
           onClick={handleStartRun}
           disabled={isStarting || isRunning}
-          className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-default disabled:opacity-60 disabled:cursor-not-allowed"
+          className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold transition-default disabled:opacity-60 disabled:cursor-not-allowed"
           style={{
             background: isRunning ? 'var(--color-amber-dim)' : 'var(--color-brand)',
             color: isRunning ? 'var(--color-amber)' : '#0B0F14',
@@ -537,7 +538,7 @@ export function Dashboard() {
 
       {/* ── Section D: Route Distribution Chart ─────────────────────────── */}
       {isCompleted && progress && chartData.length > 0 && (
-        <div className="card p-6">
+        <div className="card p-5">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h3
@@ -584,7 +585,7 @@ export function Dashboard() {
                     contentStyle={{
                       background: 'var(--color-bg-surface)',
                       border: '1px solid var(--color-border)',
-                      borderRadius: '8px',
+                      borderRadius: '6px',
                       color: 'var(--color-text-primary)',
                       fontSize: '12px',
                     }}
@@ -700,7 +701,7 @@ export function Dashboard() {
                     <p className="text-sm font-semibold mono" style={{ color: 'var(--color-amber)' }}>
                       {formatPaise(ex.exposureAmount)}
                     </p>
-                    <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                    <p className="text-xs mono" style={{ color: 'var(--color-text-muted)' }}>
                       Priority: {ex.priorityScore.toFixed(4)}
                     </p>
                   </div>

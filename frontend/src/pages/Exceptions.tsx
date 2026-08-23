@@ -142,7 +142,7 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
           id={`approve-btn-${exception.reviewId}`}
           onClick={() => submit('approve_match')}
           disabled={isBusy || !ledgerOrderId}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-40 mt-5"
+          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-40 mt-5"
           style={{
             background: 'var(--color-brand-dim)',
             color: 'var(--color-brand)',
@@ -167,7 +167,7 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
           id={`reject-btn-${exception.reviewId}`}
           onClick={() => submit('reject')}
           disabled={isBusy}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-40"
+          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-40"
           style={{
             background: 'transparent',
             color: 'var(--color-red)',
@@ -189,7 +189,7 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
           id={`unresolved-btn-${exception.reviewId}`}
           onClick={() => submit('mark_unresolved')}
           disabled={isBusy}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-40"
+          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-40"
           style={{
             background: 'transparent',
             color: 'var(--color-gray)',
@@ -291,7 +291,7 @@ function ExceptionRow({ exception: ex, isExpanded, onToggle, onResolved }: Excep
           <button
             id={`resolve-toggle-${ex.reviewId}`}
             onClick={(e) => { e.stopPropagation(); onToggle(); }}
-            className="flex items-center gap-1.5 ml-auto px-3 py-1.5 rounded-lg text-xs font-medium transition-default"
+            className="flex items-center gap-1.5 ml-auto px-3 py-1.5 rounded-md text-xs font-medium transition-default"
             style={{
               background: isExpanded ? 'var(--color-brand-dim)' : 'var(--color-bg-elevated)',
               color: isExpanded ? 'var(--color-brand)' : 'var(--color-text-secondary)',
@@ -381,7 +381,7 @@ export function Exceptions() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
@@ -399,7 +399,7 @@ export function Exceptions() {
         <button
           id="refresh-exceptions-btn"
           onClick={() => void load()}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-default"
+          className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-default"
           style={{
             background: 'var(--color-bg-surface)',
             color: 'var(--color-text-secondary)',
@@ -426,7 +426,7 @@ export function Exceptions() {
       {/* Table */}
       {exceptions.length > 0 && (
         <div
-          className="card overflow-hidden"
+          className="card card-hover overflow-hidden"
         >
           {/* Legend */}
           <div

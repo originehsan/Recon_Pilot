@@ -51,7 +51,7 @@ function EvidenceBox({ title, accentColor, borderColor, bgColor, data }: Evidenc
 
   return (
     <div
-      className="rounded-lg overflow-hidden"
+      className="rounded-md overflow-hidden"
       style={{ border: `1px solid ${borderColor}` }}
     >
       {/* Header */}
@@ -204,7 +204,7 @@ function TimelineEvent({ event, isLast }: { event: AuditEvent; isLast: boolean }
 function AuditLegend() {
   return (
     <div
-      className="flex items-center gap-6 p-3 rounded-lg text-xs"
+      className="flex items-center gap-6 p-3 rounded-md text-xs"
       style={{
         background: 'var(--color-bg-elevated)',
         border: '1px solid var(--color-border)',
@@ -262,7 +262,7 @@ export function AuditLookup() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       {/* Page header */}
       <div>
         <h1
@@ -334,7 +334,7 @@ export function AuditLookup() {
             id="audit-lookup-btn"
             onClick={handleLookup}
             disabled={loading || !entityId}
-            className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-50"
             style={{
               background: 'var(--color-brand)',
               color: '#0B0F14',

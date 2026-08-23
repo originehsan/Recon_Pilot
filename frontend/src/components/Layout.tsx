@@ -66,7 +66,7 @@ export function Layout() {
             >
               {({ isActive }) => (
                 <span
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-default"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-default"
                   style={{
                     background: isActive ? 'var(--color-brand-dim)' : 'transparent',
                     color: isActive ? 'var(--color-brand)' : 'var(--color-text-secondary)',

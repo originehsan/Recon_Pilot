@@ -23,23 +23,23 @@ export function EmptyState({
   action,
 }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
+    <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
       <div
-        className="w-14 h-14 rounded-full flex items-center justify-center"
+        className="w-10 h-10 rounded-full flex items-center justify-center"
         style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-text-muted)' }}
       >
-        <Icon size={28} strokeWidth={1.5} />
+        <Icon size={20} strokeWidth={1.5} />
       </div>
 
       <div className="flex flex-col gap-1">
         <h3
-          className="text-base font-semibold"
+          className="text-sm font-semibold"
           style={{ color: 'var(--color-text-primary)' }}
         >
           {title}
         </h3>
         {message && (
-          <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
             {message}
           </p>
         )}
@@ -48,7 +48,7 @@ export function EmptyState({
       {action && (
         <button
           onClick={action.onClick}
-          className="mt-2 px-4 py-2 rounded-lg text-sm font-medium transition-default"
+          className="mt-1 px-3 py-1.5 rounded text-xs font-medium transition-default"
           style={{
             background: 'var(--color-brand-dim)',
             color: 'var(--color-brand)',

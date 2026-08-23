@@ -177,25 +177,34 @@ body {
 
   /* ── Shadow system ────────────────────────────────────────
      3-tier elevation for dark-background UI.
-     Low = subtle card lift  (1px spread, 4px blur)
-     Medium = dropdowns/popovers (2px spread, 12px blur)
-     High = modals/overlays  (4px spread, 32px blur)
+     Low    = subtle card resting lift
+     Medium = dropdowns / popovers / hover-elevated cards
+     High   = modals / overlays
      All use low-opacity black — no colored glows.
   ───────────────────────────────────────────────────────── */
-  --shadow-low:    0 1px 3px 0 rgba(0,0,0,0.4), 0 1px 2px -1px rgba(0,0,0,0.3);
-  --shadow-medium: 0 4px 12px 0 rgba(0,0,0,0.5), 0 2px 6px -2px rgba(0,0,0,0.4);
-  --shadow-high:   0 12px 32px 0 rgba(0,0,0,0.65), 0 4px 16px -4px rgba(0,0,0,0.5);
+  --shadow-low:    0 1px 2px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-medium: 0 4px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+  --shadow-high:   0 10px 15px rgba(0,0,0,0.4), 0 4px 6px rgba(0,0,0,0.3);
 }
 
 /* ============================================================
    Utility Classes (used across multiple components)
    ============================================================ */
 
-/* Card shell — dark surface, subtle border, no heavy shadows */
+/* Card shell — dark surface, 1px border + shadow-low elevation */
 .card {
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem; /* rounded-lg */
+  border-radius: 6px; /* --radius-md */
+  box-shadow: var(--shadow-low);
+}
+
+/* Hover-elevation for interactive cards (expandable rows, panels) */
+.card-hover {
+  transition: box-shadow 150ms ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-medium);
 }
 
 /* Monospace blocks for JSON / numeric values */
