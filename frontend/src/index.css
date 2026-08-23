@@ -46,8 +46,18 @@
   --color-gray-dim:    rgba(107, 114, 128, 0.12);
   --color-gray-border: rgba(107, 114, 128, 0.25);
 
+  /* Brand action color — buttons, links, active nav, primary CTAs */
+  --color-brand:        #0d94fb;
+  --color-brand-dim:    rgba(13, 148, 251, 0.12);
+  --color-brand-border: rgba(13, 148, 251, 0.25);
+
+  /* Success = positive outcome / job completed / all-green state */
+  --color-success:        #04db7c;
+  --color-success-dim:    rgba(4, 219, 124, 0.12);
+  --color-success-border: rgba(4, 219, 124, 0.25);
+
   /* Typography */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Mulish", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
 }
 
@@ -95,24 +105,86 @@ body {
 }
 
 /* ============================================================
-   Tailwind @theme — extend with our design tokens
+   Tailwind @theme — design system tokens (Tailwind v4 CSS-based)
+   All color/typography/shape/shadow tokens live here.
+   Use: bg-background, text-foreground, bg-brand, shadow-low, etc.
    ============================================================ */
 
 @theme {
+  /* ── Base palette ─────────────────────────────────────────
+     Maps to Tailwind utilities: bg-background, bg-surface,
+     text-border, text-foreground, text-muted, bg-brand, bg-success
+  ───────────────────────────────────────────────────────── */
+  --color-background: #070e1c;
+  --color-surface:    #0f172a;
+  --color-border:     #1c2536;
+  --color-foreground: #f4f5f7;
+  --color-muted:      #97a0af;
+  --color-brand:      #0d94fb;
+  --color-success:    #04db7c;
+
+  /* ── Legacy bg-* aliases (keep existing components working) */
   --color-bg-base:     #0B0F14;
   --color-bg-surface:  #131922;
   --color-bg-elevated: #1A2230;
   --color-border-dim:  #232B36;
 
+  /* ── Legacy text-* aliases (keep existing components working) */
+  --color-text-primary:   #E8ECF1;
+  --color-text-secondary: #8B96A5;
+  --color-text-muted:     #5A6578;
+
+  /* ── Semantic decision-source colors ──────────────────────
+     ONLY for decidedBy badges and route-distribution chart.
+     Never on buttons, nav, or generic chrome.
+     Utilities: bg-deterministic, bg-ai-assisted, bg-human, bg-error
+  ───────────────────────────────────────────────────────── */
+  --color-deterministic: #14B8A6;
+  --color-ai-assisted:   #A78BFA;
+  --color-human:         #F59E0B;
+  --color-error:         #F87171;
+
+  /* ── Legacy semantic aliases (keep existing components working) */
   --color-teal:   #14B8A6;
   --color-purple: #A78BFA;
   --color-amber:  #F59E0B;
   --color-red:    #F87171;
   --color-gray:   #6B7280;
 
-  --color-text-primary:   #E8ECF1;
-  --color-text-secondary: #8B96A5;
-  --color-text-muted:     #5A6578;
+  /* ── Typography ───────────────────────────────────────────
+     font-sans → Mulish (loaded via Google Fonts in index.html)
+     font-mono → ui-monospace stack, no custom font needed
+  ───────────────────────────────────────────────────────── */
+  --font-sans: "Mulish", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+
+  /* ── Border radius ────────────────────────────────────────
+     rounded   → 4px  (default, tight Blade Edge)
+     rounded-md → 6px (medium components)
+     Avoid the generic 8-12px rounded-everywhere look.
+  ───────────────────────────────────────────────────────── */
+  --radius:    4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+
+  /* Map to Tailwind's rounded-* utilities */
+  --radius-DEFAULT: 4px;
+  --radius-sm:      4px;
+  --radius-md:      6px;
+  --radius-lg:      12px;
+  --radius-xl:      12px;
+  --radius-full:    9999px;
+
+  /* ── Shadow system ────────────────────────────────────────
+     3-tier elevation for dark-background UI.
+     Low = subtle card lift  (1px spread, 4px blur)
+     Medium = dropdowns/popovers (2px spread, 12px blur)
+     High = modals/overlays  (4px spread, 32px blur)
+     All use low-opacity black — no colored glows.
+  ───────────────────────────────────────────────────────── */
+  --shadow-low:    0 1px 3px 0 rgba(0,0,0,0.4), 0 1px 2px -1px rgba(0,0,0,0.3);
+  --shadow-medium: 0 4px 12px 0 rgba(0,0,0,0.5), 0 2px 6px -2px rgba(0,0,0,0.4);
+  --shadow-high:   0 12px 32px 0 rgba(0,0,0,0.65), 0 4px 16px -4px rgba(0,0,0,0.5);
 }
 
 /* ============================================================

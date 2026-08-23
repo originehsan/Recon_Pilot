@@ -1,5 +1,5 @@
 /**
- * LoadingSpinner — centered teal spinner.
+ * LoadingSpinner — centered brand-color spinner.
  * Used as a full-section loading state on every page.
  */
 
@@ -25,7 +25,7 @@ export function LoadingSpinner({ message, size = 'md' }: Props) {
         className={`rounded-full animate-spin ${SIZES[size]}`}
         style={{
           borderColor: 'var(--color-border)',
-          borderTopColor: 'var(--color-teal)',
+          borderTopColor: 'var(--color-brand)',
         }}
       />
       {message && (

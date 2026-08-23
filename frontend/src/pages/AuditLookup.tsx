@@ -336,7 +336,7 @@ export function AuditLookup() {
             disabled={loading || !entityId}
             className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-50"
             style={{
-              background: 'var(--color-teal)',
+              background: 'var(--color-brand)',
               color: '#0B0F14',
             }}
           >
@@ -379,7 +379,7 @@ export function AuditLookup() {
                   {' '}for{' '}
                   <span
                     className="mono text-xs px-1.5 py-0.5 rounded"
-                    style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-teal)' }}
+                    style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-brand)' }}
                   >
                     {lastQuery?.entityType}:{lastQuery?.entityId}
                   </span>

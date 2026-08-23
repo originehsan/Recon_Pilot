@@ -59,7 +59,7 @@ function RunStatusBadge({ status }: { status: string }) {
   const configs = {
     pending:    { color: 'var(--color-gray)',  bg: 'var(--color-gray-dim)',  border: 'var(--color-gray-border)',  label: 'Pending' },
     processing: { color: 'var(--color-amber)', bg: 'var(--color-amber-dim)', border: 'var(--color-amber-border)', label: 'Processing…' },
-    completed:  { color: 'var(--color-teal)',  bg: 'var(--color-teal-dim)',  border: 'var(--color-teal-border)',  label: 'Completed' },
+    completed:  { color: 'var(--color-success)', bg: 'var(--color-success-dim)', border: 'var(--color-success-border)', label: 'Completed' },
     failed:     { color: 'var(--color-red)',   bg: 'var(--color-red-dim)',   border: 'var(--color-red-border)',   label: 'Failed' },
   } as const;
 
@@ -332,7 +332,7 @@ export function Dashboard() {
           }}
         >
           <div className="flex items-center gap-2.5">
-            <Upload size={16} style={{ color: 'var(--color-teal)' }} />
+            <Upload size={16} style={{ color: 'var(--color-brand)' }} />
             <span className="text-sm font-semibold">Upload Batch</span>
             <span className="section-label">Paste JSON payload to seed the database</span>
           </div>
@@ -350,7 +350,7 @@ export function Dashboard() {
               Paste a JSON payload matching the{' '}
               <code
                 className="px-1 rounded mono"
-                style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-teal)' }}
+                style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-brand)' }}
               >
                 POST /api/batches
               </code>{' '}
@@ -379,9 +379,9 @@ export function Dashboard() {
               <div
                 className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm"
                 style={{
-                  background: 'var(--color-teal-dim)',
-                  color: 'var(--color-teal)',
-                  border: '1px solid var(--color-teal-border)',
+                  background: 'var(--color-brand-dim)',
+                  color: 'var(--color-brand)',
+                  border: '1px solid var(--color-brand-border)',
                 }}
               >
                 <CheckCircle2 size={14} />
@@ -395,7 +395,7 @@ export function Dashboard() {
                 disabled={batchLoading}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-50"
                 style={{
-                  background: 'var(--color-teal)',
+                  background: 'var(--color-brand)',
                   color: '#0B0F14',
                 }}
               >
@@ -434,7 +434,7 @@ export function Dashboard() {
           disabled={isStarting || isRunning}
           className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-default disabled:opacity-60 disabled:cursor-not-allowed"
           style={{
-            background: isRunning ? 'var(--color-amber-dim)' : 'var(--color-teal)',
+            background: isRunning ? 'var(--color-amber-dim)' : 'var(--color-brand)',
             color: isRunning ? 'var(--color-amber)' : '#0B0F14',
             border: isRunning ? '1px solid var(--color-amber-border)' : 'none',
             minWidth: '140px',
@@ -499,7 +499,7 @@ export function Dashboard() {
                 label="Resolved"
                 value={progress.resolved}
                 icon={CheckCircle2}
-                accentColor="teal"
+                accentColor="success"
                 description="Finalized by gate"
               />
               <StatCard
@@ -644,7 +644,7 @@ export function Dashboard() {
             <button
               onClick={() => navigate('/exceptions')}
               className="text-xs font-medium transition-default"
-              style={{ color: 'var(--color-teal)' }}
+              style={{ color: 'var(--color-brand)' }}
             >
               View All →
             </button>

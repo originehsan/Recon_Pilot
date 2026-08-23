@@ -10,17 +10,19 @@ interface Props {
   value: number | string | null | undefined;
   icon?: LucideIcon;
   /** Accent color for the icon — must be one of the semantic design tokens */
-  accentColor?: 'teal' | 'purple' | 'amber' | 'red' | 'gray';
+  accentColor?: 'teal' | 'purple' | 'amber' | 'red' | 'gray' | 'brand' | 'success';
   /** Additional description text below the value */
   description?: string;
 }
 
 const ACCENT_COLORS: Record<NonNullable<Props['accentColor']>, string> = {
-  teal:   'var(--color-teal)',
-  purple: 'var(--color-purple)',
-  amber:  'var(--color-amber)',
-  red:    'var(--color-red)',
-  gray:   'var(--color-gray)',
+  teal:    'var(--color-teal)',
+  purple:  'var(--color-purple)',
+  amber:   'var(--color-amber)',
+  red:     'var(--color-red)',
+  gray:    'var(--color-gray)',
+  brand:   'var(--color-brand)',
+  success: '#04db7c',
 };
 
 export function StatCard({ label, value, icon: Icon, accentColor = 'gray', description }: Props) {

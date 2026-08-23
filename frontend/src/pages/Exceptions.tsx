@@ -144,15 +144,15 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
           disabled={isBusy || !ledgerOrderId}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-default disabled:opacity-40 mt-5"
           style={{
-            background: 'var(--color-teal-dim)',
-            color: 'var(--color-teal)',
-            border: '1px solid var(--color-teal-border)',
+            background: 'var(--color-brand-dim)',
+            color: 'var(--color-brand)',
+            border: '1px solid var(--color-brand-border)',
           }}
         >
           {submitting === 'approve_match' ? (
             <span
               className="w-4 h-4 rounded-full animate-spin border-2"
-              style={{ borderColor: 'var(--color-teal-border)', borderTopColor: 'var(--color-teal)' }}
+              style={{ borderColor: 'var(--color-brand-border)', borderTopColor: 'var(--color-brand)' }}
             />
           ) : (
             <CheckCircle2 size={14} />
@@ -293,9 +293,9 @@ function ExceptionRow({ exception: ex, isExpanded, onToggle, onResolved }: Excep
             onClick={(e) => { e.stopPropagation(); onToggle(); }}
             className="flex items-center gap-1.5 ml-auto px-3 py-1.5 rounded-lg text-xs font-medium transition-default"
             style={{
-              background: isExpanded ? 'var(--color-teal-dim)' : 'var(--color-bg-elevated)',
-              color: isExpanded ? 'var(--color-teal)' : 'var(--color-text-secondary)',
-              border: `1px solid ${isExpanded ? 'var(--color-teal-border)' : 'var(--color-border)'}`,
+              background: isExpanded ? 'var(--color-brand-dim)' : 'var(--color-bg-elevated)',
+              color: isExpanded ? 'var(--color-brand)' : 'var(--color-text-secondary)',
+              border: `1px solid ${isExpanded ? 'var(--color-brand-border)' : 'var(--color-border)'}`,
             }}
           >
             Resolve

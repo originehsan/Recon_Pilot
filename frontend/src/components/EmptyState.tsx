@@ -50,15 +50,15 @@ export function EmptyState({
           onClick={action.onClick}
           className="mt-2 px-4 py-2 rounded-lg text-sm font-medium transition-default"
           style={{
-            background: 'var(--color-teal-dim)',
-            color: 'var(--color-teal)',
-            border: '1px solid var(--color-teal-border)',
+            background: 'var(--color-brand-dim)',
+            color: 'var(--color-brand)',
+            border: '1px solid var(--color-brand-border)',
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(20,184,166,0.2)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(13,148,251,0.2)';
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-teal-dim)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-brand-dim)';
           }}
         >
           {action.label}

@@ -32,7 +32,7 @@ export function Layout() {
         <div className="flex items-center gap-2.5">
           <div
             className="w-7 h-7 rounded-md flex items-center justify-center"
-            style={{ background: 'var(--color-teal-dim)', color: 'var(--color-teal)' }}
+            style={{ background: 'var(--color-brand-dim)', color: 'var(--color-brand)' }}
           >
             <Activity size={16} strokeWidth={2.5} />
           </div>
@@ -45,9 +45,9 @@ export function Layout() {
           <span
             className="text-xs font-medium px-1.5 py-0.5 rounded"
             style={{
-              background: 'var(--color-teal-dim)',
-              color: 'var(--color-teal)',
-              border: '1px solid var(--color-teal-border)',
+              background: 'var(--color-brand-dim)',
+              color: 'var(--color-brand)',
+              border: '1px solid var(--color-brand-border)',
             }}
           >
             BETA
@@ -68,9 +68,9 @@ export function Layout() {
                 <span
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-default"
                   style={{
-                    background: isActive ? 'var(--color-teal-dim)' : 'transparent',
-                    color: isActive ? 'var(--color-teal)' : 'var(--color-text-secondary)',
-                    border: isActive ? '1px solid var(--color-teal-border)' : '1px solid transparent',
+                    background: isActive ? 'var(--color-brand-dim)' : 'transparent',
+                    color: isActive ? 'var(--color-brand)' : 'var(--color-text-secondary)',
+                    border: isActive ? '1px solid var(--color-brand-border)' : '1px solid transparent',
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
