@@ -265,3 +265,29 @@ export async function finalizeCase(input: FinalizeInput): Promise<ResolvedDecisi
     connection.release();
   }
 }
+
+/**
+ * Read-only lookup of a settlement's current (head-of-chain) resolution id,
+ * or null if it has none. Not a write, not a ResolvedDecision, and not
+ * covered by the "only decisionGate.ts writes resolutions" invariant - that
+ * invariant is about constructing/branding a finalized decision and about
+ * INSERT/UPDATE/DELETE against `resolutions`, not about reading it.
+ *
+ * Added for backend/src/api/routes/exceptions.ts: finalizeCase's returned
+ * ResolvedDecision does not include the new resolutions row's id (see
+ * ResolvedDecisionProps in types.ts - it was never part of that shape), but
+ * POST /api/exceptions/:id/resolve needs it to record review_queue.resolution_id
+ * after a human resolves an exception. Exported here (reusing the exact
+ * same head-of-chain query getCurrentResolution already uses internally)
+ * rather than duplicating that SQL pattern in the API layer.
+ */
+export async function getCurrentResolutionId(settlementId: number): Promise<number | null> {
+  const pool = getPool();
+  const connection = await pool.getConnection();
+  try {
+    const current = await getCurrentResolution(settlementId, connection);
+    return current ? current.id : null;
+  } finally {
+    connection.release();
+  }
+}
