@@ -127,11 +127,20 @@ function TimelineEvent({ event, isLast }: { event: AuditEvent; isLast: boolean }
       {/* Event card */}
       <div className="flex-1 pb-6">
         {/* Header */}
+        {/* Two anchored groups via justify-between, not one flat inline-flex
+            row: DecisionSourceBadge's rendered width varies with actorType
+            ("Deterministic" is much wider than "Human" or "AI-Assisted"),
+            so with everything in one inline-flex row the seq#/timestamp
+            text that followed it landed at a different X per event. Moving
+            it into its own right-hand group (with the chevron) anchors it
+            to the row's right edge instead - consistent across every event
+            regardless of label/badge width, without guessing fixed column
+            widths for text that's genuinely variable-length. */}
         <button
           className="w-full text-left flex items-center justify-between gap-3 mb-3"
           onClick={() => setCollapsed((v) => !v)}
         >
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-3 flex-wrap min-w-0">
             <span
               className="text-sm font-semibold"
               style={{ color: 'var(--color-text-primary)' }}
@@ -139,19 +148,21 @@ function TimelineEvent({ event, isLast }: { event: AuditEvent; isLast: boolean }
               {stageLabel}
             </span>
             <DecisionSourceBadge value={event.actorType} size="sm" />
-            <span className="section-label">
-              seq #{event.sequenceNo} · {new Date(event.createdAt).toLocaleString()}
-            </span>
           </div>
 
-          <ChevronRight
-            size={14}
-            className="shrink-0 transition-default"
-            style={{
-              color: 'var(--color-text-muted)',
-              transform: collapsed ? 'rotate(0deg)' : 'rotate(90deg)',
-            }}
-          />
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="section-label whitespace-nowrap">
+              seq #{event.sequenceNo} · {new Date(event.createdAt).toLocaleString()}
+            </span>
+            <ChevronRight
+              size={14}
+              className="shrink-0 transition-default"
+              style={{
+                color: 'var(--color-text-muted)',
+                transform: collapsed ? 'rotate(0deg)' : 'rotate(90deg)',
+              }}
+            />
+          </div>
         </button>
 
         {/* Evidence sections — three distinct boxes, NEVER collapsed into one */}
@@ -272,7 +283,7 @@ export function AuditLookup() {
           Audit Lookup
         </h1>
         <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
-          Trace every decision event for any entity — evidence used, AI output, and gate finalization are always kept separate.
+          Full decision trail for any entity — evidence used, AI-assisted output, and gate finalization are always kept separate.
         </p>
       </div>
 
@@ -357,7 +368,7 @@ export function AuditLookup() {
       {error && <ErrorBanner message={error} onDismiss={() => setError(null)} />}
 
       {/* Loading */}
-      {loading && <LoadingSpinner message="Fetching audit events…" />}
+      {loading && <LoadingSpinner message="Looking up decision trail…" />}
 
       {/* Results */}
       {events !== null && !loading && (
@@ -365,8 +376,8 @@ export function AuditLookup() {
           {events.length === 0 ? (
             <EmptyState
               icon={Search}
-              title="No audit events found"
-              message={`No events recorded for ${lastQuery?.entityType} ID ${lastQuery?.entityId}.`}
+              title="No audit trail found"
+              message={`No decisions recorded for ${lastQuery?.entityType} #${lastQuery?.entityId}.`}
             />
           ) : (
             <div className="flex flex-col gap-4">

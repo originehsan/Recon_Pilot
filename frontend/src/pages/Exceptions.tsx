@@ -3,7 +3,8 @@
  *
  * Fetches GET /api/runs/:id/exceptions and renders a sortable table.
  * Each row has an inline expand form for Approve / Reject / Mark Unresolved.
- * On successful resolve (200), the row is removed from local state.
+ * On successful resolve (200), the row flashes green for 600ms (success
+ * micro-confirmation) before being removed from local state.
  *
  * If no runId is in context (e.g. direct URL navigation), shows EmptyState.
  */
@@ -21,19 +22,13 @@ import {
   ApiError,
 } from '../api/client';
 import { useRunContext } from '../context/RunContext';
-import { LoadingSpinner } from '../components/LoadingSpinner';
 import { EmptyState } from '../components/EmptyState';
 import { ErrorBanner } from '../components/ErrorBanner';
 import { DecisionSourceBadge } from '../components/DecisionSourceBadge';
+import { SkeletonTable } from '../components/SkeletonTable';
+import { formatPaise, formatDecimal } from '../utils/format';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function formatPaise(paise: number): string {
-  return '₹' + (paise / 100).toLocaleString('en-IN', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-}
 
 function humanizeReasonCode(code: string): string {
   const MAP: Record<string, string> = {
@@ -107,8 +102,14 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
         <ErrorBanner message={formError} onDismiss={() => setFormError(null)} />
       )}
 
-      {/* Approve Match — requires ledgerOrderId */}
-      <div className="flex items-center gap-3">
+      {/* Approve Match — requires ledgerOrderId. items-end (not items-center)
+          so the button's bottom edge lines up with the input's bottom edge
+          - the label sits above the input, so a naive items-center would
+          vertically center the button against the label+input block as a
+          whole, not against the input itself. This replaces a hardcoded
+          mt-5 offset that only happened to work for this exact label/input
+          size and would silently drift out of alignment if either changed. */}
+      <div className="flex items-end gap-3">
         <div className="flex-1">
           <label
             htmlFor={`ledger-order-${exception.reviewId}`}
@@ -142,7 +143,7 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
           id={`approve-btn-${exception.reviewId}`}
           onClick={() => submit('approve_match')}
           disabled={isBusy || !ledgerOrderId}
-          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-40 mt-5"
+          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-default disabled:opacity-40"
           style={{
             background: 'var(--color-brand-dim)',
             color: 'var(--color-brand)',
@@ -225,24 +226,33 @@ function ResolveForm({ exception, onResolved, onCancel }: ResolveFormProps) {
 interface ExceptionRowProps {
   exception: Exception;
   isExpanded: boolean;
+  /** Row is in the "resolved" flash state — green tint for 600ms before removal */
+  isFlashing: boolean;
+  /** 0-based index used to stagger the fade-in animation on initial render */
+  rowIndex: number;
   onToggle: () => void;
   onResolved: (reviewId: number) => void;
 }
 
-function ExceptionRow({ exception: ex, isExpanded, onToggle, onResolved }: ExceptionRowProps) {
+function ExceptionRow({ exception: ex, isExpanded, isFlashing, rowIndex, onToggle, onResolved }: ExceptionRowProps) {
+  // Stagger cap: only animate the first 10 rows to avoid runaway delays
+  const staggerDelay = Math.min(rowIndex, 9) * 35; // 35ms per row, cap at 315ms
+
   return (
     <>
       <tr
-        className="transition-default cursor-pointer"
-        onClick={onToggle}
+        className={`transition-default cursor-pointer row-enter${isFlashing ? ' row-resolve-flash' : ''}`}
+        onClick={isFlashing ? undefined : onToggle}
         style={{
           background: isExpanded ? 'var(--color-bg-elevated)' : undefined,
+          pointerEvents: isFlashing ? 'none' : undefined,
+          animationDelay: `${staggerDelay}ms`,
         }}
         onMouseEnter={(e) => {
-          if (!isExpanded) (e.currentTarget as HTMLTableRowElement).style.background = 'rgba(255,255,255,0.02)';
+          if (!isExpanded && !isFlashing) (e.currentTarget as HTMLTableRowElement).style.background = 'rgba(255,255,255,0.02)';
         }}
         onMouseLeave={(e) => {
-          if (!isExpanded) (e.currentTarget as HTMLTableRowElement).style.background = '';
+          if (!isExpanded && !isFlashing) (e.currentTarget as HTMLTableRowElement).style.background = '';
         }}
       >
         {/* Reason */}
@@ -256,7 +266,7 @@ function ExceptionRow({ exception: ex, isExpanded, onToggle, onResolved }: Excep
         </td>
 
         {/* Exposure */}
-        <td className="px-5 py-3.5">
+        <td className="px-5 py-3.5 text-right">
           <span
             className="text-sm font-semibold mono"
             style={{ color: 'var(--color-amber)' }}
@@ -330,6 +340,12 @@ export function Exceptions() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  /**
+   * ID of the row currently playing the success-flash animation.
+   * Set on a confirmed 200 resolve; cleared after 600ms when the row
+   * is removed from state. While set, the row is non-interactive.
+   */
+  const [flashingId, setFlashingId] = useState<number | null>(null);
 
   const load = useCallback(async () => {
     if (!runId) return;
@@ -358,9 +374,15 @@ export function Exceptions() {
   }
 
   function handleResolved(reviewId: number) {
-    // Remove the resolved row immediately after confirmed 200 response
-    setExceptions((prev) => prev.filter((ex) => ex.reviewId !== reviewId));
+    // Collapse the expand form immediately so the flash reads cleanly
     setExpandedId(null);
+    // Trigger the success-flash CSS animation on the resolved row
+    setFlashingId(reviewId);
+    // After the animation completes (~600ms), remove the row from state
+    setTimeout(() => {
+      setExceptions((prev) => prev.filter((ex) => ex.reviewId !== reviewId));
+      setFlashingId(null);
+    }, 620);
   }
 
   // ── No runId case (direct URL navigation) ────────────────────────────────
@@ -375,9 +397,27 @@ export function Exceptions() {
     );
   }
 
-  // ── Loading ───────────────────────────────────────────────────────────────
+  // ── Loading — skeleton instead of bare spinner on full-table views ───────
   if (loading) {
-    return <LoadingSpinner message="Loading exceptions…" size="lg" />;
+    return (
+      <div className="flex flex-col gap-4">
+        {/* Keep the page header visible so the layout doesn't jump */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1
+              className="text-2xl font-bold tracking-tight"
+              style={{ color: 'var(--color-text-primary)' }}
+            >
+              Exceptions
+            </h1>
+            <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Cases that need a human decision before they can be finalized · Run #{runId}
+            </p>
+          </div>
+        </div>
+        <SkeletonTable />
+      </div>
+    );
   }
 
   return (
@@ -392,7 +432,7 @@ export function Exceptions() {
             Exceptions
           </h1>
           <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
-            Cases the decision gate could not auto-finalize · Run #{runId}
+            Cases that need a human decision before they can be finalized · Run #{runId}
           </p>
         </div>
 
@@ -439,7 +479,7 @@ export function Exceptions() {
             <div className="flex items-center gap-1.5">
               <DecisionSourceBadge value="human" size="sm" />
               <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                = awaiting human decision
+                = requires a human decision
               </span>
             </div>
           </div>
@@ -449,7 +489,10 @@ export function Exceptions() {
               <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
                 {[
                   { label: 'Reason', align: 'left' },
-                  { label: 'Exposure', align: 'left' },
+                  // Right-aligned to match Priority Score - both are numeric
+                  // columns, and Rule 3 (never left-align a number next to a
+                  // label) applies to Exposure exactly as much as Priority.
+                  { label: 'Exposure', align: 'right' },
                   { label: 'Narration', align: 'left' },
                   { label: 'Priority Score', align: 'right' },
                   { label: '', align: 'right' },
@@ -465,13 +508,15 @@ export function Exceptions() {
               </tr>
             </thead>
             <tbody>
-              {exceptions.map((ex) => (
+              {exceptions.map((ex, idx) => (
                 <ExceptionRow
                   key={ex.reviewId}
                   exception={ex}
                   isExpanded={expandedId === ex.reviewId}
+                  isFlashing={flashingId === ex.reviewId}
                   onToggle={() => handleToggle(ex.reviewId)}
                   onResolved={handleResolved}
+                  rowIndex={idx}
                 />
               ))}
             </tbody>

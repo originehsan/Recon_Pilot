@@ -177,15 +177,26 @@ router.get('/runs/:id/exceptions', async (req: Request, res: Response, next: Nex
       [status],
     );
 
+    // mysql2 returns DECIMAL columns (exposure_amount, priority_score,
+    // ingested_settlements.amount) as JS STRINGS by default, not numbers -
+    // confirmed live (e.g. priority_score came back as "40443737.60000000",
+    // typeof "string"). The Exception TS type below has always declared
+    // these as `number`, so every consumer (Dashboard.tsx, Exceptions.tsx)
+    // reasonably called number methods like .toFixed() directly on them -
+    // which crashed the moment a real run actually populated review_queue,
+    // since dev/test data until now never exercised this path with a live
+    // DB round trip. Converted to real numbers here, at the API boundary,
+    // so the response honestly matches its own declared type instead of
+    // leaking a MySQL driver implementation detail to every caller.
     res.json(
       rows.map((row) => ({
         reviewId: row.reviewId,
         reasonCode: row.reasonCode,
-        exposureAmount: row.exposureAmount,
-        priorityScore: row.priorityScore,
+        exposureAmount: Number(row.exposureAmount),
+        priorityScore: Number(row.priorityScore),
         status: row.status,
         settlementEntityId: row.settlementEntityId,
-        settlementAmount: row.settlementAmount,
+        settlementAmount: Number(row.settlementAmount),
         narration: row.narration,
         createdAt: row.createdAt,
       })),

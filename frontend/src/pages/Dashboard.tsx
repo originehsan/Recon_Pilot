@@ -16,7 +16,7 @@ import {
 } from 'recharts';
 import {
   Play, Upload, ChevronDown, ChevronUp, CheckCircle2,
-  AlertTriangle, Clock, Hash, Layers, Info,
+  AlertTriangle, AlertCircle, Clock, Hash, Layers, Info, Code2, ChevronRight,
 } from 'lucide-react';
 
 import {
@@ -26,20 +26,13 @@ import {
 } from '../api/client';
 import { useRunContext } from '../context/RunContext';
 import { StatCard } from '../components/StatCard';
-import { LoadingSpinner } from '../components/LoadingSpinner';
 import { EmptyState } from '../components/EmptyState';
 import { ErrorBanner } from '../components/ErrorBanner';
 import { DecisionSourceBadge } from '../components/DecisionSourceBadge';
+import { SkeletonStatCards } from '../components/SkeletonStatCards';
+import { formatPaise, formatDecimal } from '../utils/format';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-
-/** Format paise integer as ₹ with Indian locale formatting */
-function formatPaise(paise: number): string {
-  return '₹' + (paise / 100).toLocaleString('en-IN', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-}
 
 /** Convert raw snake_case reasonCode to a readable label */
 function humanizeReasonCode(code: string): string {
@@ -57,10 +50,10 @@ function humanizeReasonCode(code: string): string {
 /** Status badge rendering */
 function RunStatusBadge({ status }: { status: string }) {
   const configs = {
-    pending:    { color: 'var(--color-gray)',  bg: 'var(--color-gray-dim)',  border: 'var(--color-gray-border)',  label: 'Pending' },
-    processing: { color: 'var(--color-amber)', bg: 'var(--color-amber-dim)', border: 'var(--color-amber-border)', label: 'Processing…' },
+    pending:    { color: 'var(--color-gray)',    bg: 'var(--color-gray-dim)',    border: 'var(--color-gray-border)',    label: 'Pending' },
+    processing: { color: 'var(--color-amber)',   bg: 'var(--color-amber-dim)',   border: 'var(--color-amber-border)',   label: 'Processing…' },
     completed:  { color: 'var(--color-success)', bg: 'var(--color-success-dim)', border: 'var(--color-success-border)', label: 'Completed' },
-    failed:     { color: 'var(--color-red)',   bg: 'var(--color-red-dim)',   border: 'var(--color-red-border)',   label: 'Failed' },
+    failed:     { color: 'var(--color-red)',     bg: 'var(--color-red-dim)',     border: 'var(--color-red-border)',     label: 'Failed' },
   } as const;
 
   const cfg = configs[status as keyof typeof configs] ?? configs.pending;
@@ -68,7 +61,13 @@ function RunStatusBadge({ status }: { status: string }) {
   return (
     <span
       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold"
-      style={{ color: cfg.color, background: cfg.bg, border: `1px solid ${cfg.border}` }}
+      style={{
+        color: cfg.color,
+        background: cfg.bg,
+        border: `1px solid ${cfg.border}`,
+        // P2: smooth color transition between status states (pending → processing → completed)
+        transition: 'background-color 300ms ease, color 300ms ease, border-color 300ms ease',
+      }}
     >
       {status === 'processing' && (
         <span
@@ -141,6 +140,103 @@ const SAMPLE_BATCH: BatchUploadPayload = {
     },
   ],
 };
+
+// ─── HowMatchingWorks ─────────────────────────────────────────────────────────
+// Controlled disclosure replacing the native <details> element so we can
+// add hover effects, chevron rotation, and rich step styling.
+
+const MATCHING_STEPS = [
+  { label: 'Exact matching',       desc: 'hash-based identity check' },
+  { label: 'Similarity scoring',   desc: 'Fellegi-Sunter probabilistic model' },
+  { label: 'Optimal assignment',   desc: 'Hungarian algorithm' },
+  { label: 'AI investigation',     desc: 'only for genuinely ambiguous cases' },
+  { label: 'Decision gate',        desc: 'sole finalization point; no module bypasses it' },
+] as const;
+
+function HowMatchingWorks() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="mt-2">
+      {/* Trigger row */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-1.5 group"
+        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+      >
+        <ChevronRight
+          size={13}
+          style={{
+            color: 'var(--color-brand)',
+            transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+            transition: 'transform 180ms ease',
+            flexShrink: 0,
+          }}
+        />
+        <span
+          className="text-xs font-medium"
+          style={{ color: 'var(--color-text-primary)' }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLSpanElement).style.textDecoration = 'underline';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLSpanElement).style.textDecoration = 'none';
+          }}
+        >
+          How matching works
+        </span>
+        <span
+          className="text-xs px-1.5 py-0.5 rounded"
+          style={{
+            background: 'var(--color-bg-elevated)',
+            color: 'var(--color-text-muted)',
+            border: '1px solid var(--color-border)',
+            lineHeight: 1,
+          }}
+        >
+          5 steps
+        </span>
+      </button>
+
+      {/* Expanded content */}
+      {open && (
+        <div className="mt-3 flex flex-col gap-3 pl-1">
+          {MATCHING_STEPS.map((step, i) => (
+            <div key={i} className="flex items-center gap-3">
+              {/* Circle number badge — centered against the two-line block */}
+              <span
+                className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold"
+                style={{
+                  background: 'var(--color-brand-dim)',
+                  color: 'var(--color-brand)',
+                  border: '1px solid var(--color-brand-border)',
+                  lineHeight: 1,
+                }}
+              >
+                {i + 1}
+              </span>
+              {/* Stacked label / description */}
+              <div className="flex flex-col gap-0.5">
+                <span
+                  className="text-xs font-semibold leading-snug"
+                  style={{ color: 'var(--color-text-primary)' }}
+                >
+                  {step.label}
+                </span>
+                <span
+                  className="text-xs leading-snug"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  {step.desc}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -301,7 +397,11 @@ export function Dashboard() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex flex-col gap-5">
+    // gap-4 to match Exceptions.tsx and AuditLookup.tsx's identical
+    // top-level header-to-sibling-sections rhythm (was gap-5 here only -
+    // the one page out of three using a different value with no semantic
+    // reason for the difference).
+    <div className="flex flex-col gap-4">
 
       {/* Page header */}
       <div className="flex items-start justify-between">
@@ -316,6 +416,78 @@ export function Dashboard() {
             Deterministic matching engine · AI investigation for ambiguous cases · Human review gate
           </p>
         </div>
+      </div>
+
+      {/* ── Decision Architecture ─────────────────────────────────────────── */}
+      <div className="card p-5 flex flex-col gap-0">
+        <p className="section-label mb-3">Decision Architecture</p>
+
+        {/* Row 1 — Deterministic */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '140px 1fr',
+            columnGap: '1.5rem',
+            alignItems: 'center',
+            borderBottom: '1px solid var(--color-border)',
+            paddingTop: '0.75rem',
+            paddingBottom: '0.75rem',
+          }}
+        >
+          <DecisionSourceBadge value="stage1_exact" size="sm" />
+          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
+            Matched automatically when the amount, reference, and identity all agree exactly. No AI involved.
+          </span>
+        </div>
+
+        {/* Row 2 — AI-Assisted */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '140px 1fr',
+            columnGap: '1.5rem',
+            alignItems: 'center',
+            borderBottom: '1px solid var(--color-border)',
+            paddingTop: '0.75rem',
+            paddingBottom: '0.75rem',
+          }}
+        >
+          <DecisionSourceBadge value="AI" size="sm" />
+          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
+            AI investigates cases the rules can't resolve, and the decision gate confirms every result before it closes.
+          </span>
+        </div>
+
+        {/* Row 3 — Human */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '140px 1fr',
+            columnGap: '1.5rem',
+            alignItems: 'center',
+            paddingTop: '0.75rem',
+            paddingBottom: '0.75rem',
+          }}
+        >
+          <DecisionSourceBadge value="human" size="sm" />
+          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
+            A reviewer makes the final call when neither automated matching nor AI reaches sufficient confidence.
+          </span>
+        </div>
+
+        {/* Guarantee */}
+        <p
+          className="text-xs"
+          style={{
+            color: 'var(--color-text-primary)',
+            borderTop: '1px solid var(--color-border)',
+            paddingTop: '0.625rem',
+            marginTop: '0.25rem',
+            fontWeight: 600,
+          }}
+        >
+          Every decision passes through the same gate — AI can investigate, but it can never finalize a case on its own.
+        </p>
       </div>
 
       {/* ── Section A: Batch Upload ──────────────────────────────────────── */}
@@ -334,7 +506,7 @@ export function Dashboard() {
           <div className="flex items-center gap-2.5">
             <Upload size={16} style={{ color: 'var(--color-brand)' }} />
             <span className="text-sm font-semibold">Upload Batch</span>
-            <span className="section-label">Paste JSON payload to seed the database</span>
+            <span className="section-label">Load your settlement data</span>
           </div>
           {batchPanelOpen
             ? <ChevronUp size={16} style={{ color: 'var(--color-text-muted)' }} />
@@ -347,18 +519,22 @@ export function Dashboard() {
             style={{ borderTop: '1px solid var(--color-border)' }}
           >
             <p className="text-xs pt-4" style={{ color: 'var(--color-text-muted)' }}>
-              Paste a JSON payload matching the{' '}
-              <code
-                className="px-1 rounded mono"
-                style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-brand)' }}
-              >
-                POST /api/batches
-              </code>{' '}
-              schema. A small sample (5–10 records) is pre-filled below.{' '}
-              <strong style={{ color: 'var(--color-amber)' }}>
-                ⚠ Use a small batch to conserve Gemini API quota.
-              </strong>
+              Paste your batch as JSON, or try it with the sample below (5–10 records).
             </p>
+
+            <div
+              className="flex items-center gap-2 text-xs"
+              style={{ color: 'var(--color-amber)' }}
+            >
+              <AlertCircle size={13} className="shrink-0" />
+              Keep test batches small — this keeps the demo responsive for everyone reviewing it.
+            </div>
+
+            {/* Textarea label */}
+            <div className="flex items-center gap-1.5 mt-1" style={{ color: 'var(--color-text-muted)' }}>
+              <Code2 size={12} />
+              <span className="section-label">Batch input · JSON</span>
+            </div>
 
             <textarea
               value={batchJson}
@@ -417,16 +593,21 @@ export function Dashboard() {
 
       {/* ── Section B: Start New Run ─────────────────────────────────────── */}
       <div
-        className="card p-5 flex items-center justify-between gap-4"
+        className="card p-5 flex items-start justify-between gap-4"
       >
-        <div>
+        <div className="flex-1 min-w-0">
           <h2 className="text-base font-semibold" style={{ color: 'var(--color-text-primary)' }}>
             Reconciliation Run
           </h2>
           <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-secondary)' }}>
-            Runs the full pipeline: hash matching → Fellegi-Sunter scoring → Hungarian algorithm →
-            AI investigation (only for ambiguous cases) → decision gate finalization.
+            Every settlement is matched automatically using deterministic rules. Only cases the
+            system can't resolve with certainty go to AI investigation — and AI never closes a
+            case on its own. A final deterministic check has to sign off before any exception
+            is resolved.
           </p>
+
+          {/* ── How Matching Works disclosure ── */}
+          <HowMatchingWorks />
         </div>
 
         <button
@@ -518,19 +699,16 @@ export function Dashboard() {
               />
             </div>
           ) : (
-            <div
-              className="card p-4 text-sm"
-              style={{ color: 'var(--color-text-muted)' }}
-            >
-              Waiting for pipeline to start…
-            </div>
+            // No progress data yet — show skeleton stat cards while the initial
+            // poll hasn't returned data (replaces the plain "Waiting…" text)
+            <SkeletonStatCards />
           )}
 
           {/* Failed banner */}
           {isFailed && (
             <ErrorBanner
               message={`Run #${runData.runId} failed`}
-              detail={(runData as RunResponse & { error_message?: string }).error_message ?? 'Check backend logs for details.'}
+              detail={(runData as RunResponse & { error_message?: string }).error_message ?? 'Check server logs for details, or try starting a new run.'}
             />
           )}
         </div>
@@ -560,7 +738,7 @@ export function Dashboard() {
               }}
             >
               <Info size={12} />
-              Status breakdown · per-decidedBy breakdown not available from run summary API
+              Outcome totals only — per-source breakdown available in the Audit trail
             </div>
           </div>
 
@@ -605,9 +783,9 @@ export function Dashboard() {
             {/* Legend details */}
             <div className="flex flex-col gap-3 flex-1">
               {[
-                { label: 'Resolved', value: progress.resolved,     color: PIE_COLORS.resolved,     desc: 'Finalized through decision gate' },
-                { label: 'In Review', value: progress.reviewQueued, color: PIE_COLORS.reviewQueued, desc: 'Queued for human review' },
-                { label: 'Failed',   value: progress.failed,       color: PIE_COLORS.failed,       desc: 'Pipeline error or unresolvable' },
+                { label: 'Resolved',  value: progress.resolved,     color: PIE_COLORS.resolved,     desc: 'Finalized by the decision gate' },
+                { label: 'In Review', value: progress.reviewQueued, color: PIE_COLORS.reviewQueued, desc: 'Awaiting human review' },
+                { label: 'Failed',    value: progress.failed,       color: PIE_COLORS.failed,       desc: 'Could not be automatically resolved' },
               ].map(({ label, value, color, desc }) => (
                 <div key={label} className="flex items-center gap-3">
                   <div
@@ -660,7 +838,31 @@ export function Dashboard() {
             action={{ label: 'Start a Run', onClick: handleStartRun }}
           />
         ) : exceptionsLoading ? (
-          <LoadingSpinner message="Loading exceptions…" />
+          // P1: inline skeleton for the recent-exceptions preview
+          // (3 shimmer rows matching the preview item shape)
+          <div role="status" aria-label="Loading exceptions…" aria-busy="true">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between px-5 py-3.5 gap-4"
+                style={{
+                  borderBottom: i < 2 ? '1px solid var(--color-border-subtle)' : 'none',
+                }}
+              >
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="skeleton-line h-5 rounded-full" style={{ width: 80, flexShrink: 0 }} />
+                  <div className="flex-1 flex flex-col gap-1.5">
+                    <div className="skeleton-line h-4 rounded" style={{ width: '60%' }} />
+                    <div className="skeleton-line h-3 rounded" style={{ width: '40%' }} />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1.5 items-end shrink-0">
+                  <div className="skeleton-line h-4 rounded" style={{ width: 72 }} />
+                  <div className="skeleton-line h-3 rounded" style={{ width: 56 }} />
+                </div>
+              </div>
+            ))}
+          </div>
         ) : exceptionsError ? (
           <div className="p-5">
             <ErrorBanner message={exceptionsError} onDismiss={() => setExceptionsError(null)} />
@@ -680,9 +882,11 @@ export function Dashboard() {
             {exceptions.map((ex, idx) => (
               <div
                 key={ex.reviewId}
-                className="flex items-center justify-between px-5 py-3.5 gap-4"
+                className="flex items-center justify-between px-5 py-3.5 gap-4 row-enter"
                 style={{
                   borderBottom: idx < exceptions.length - 1 ? '1px solid var(--color-border-subtle)' : 'none',
+                  // P3: stagger each preview row; cap at first 10 (only 3 here, but consistent with table)
+                  animationDelay: `${Math.min(idx, 9) * 35}ms`,
                 }}
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -702,7 +906,7 @@ export function Dashboard() {
                       {formatPaise(ex.exposureAmount)}
                     </p>
                     <p className="text-xs mono" style={{ color: 'var(--color-text-muted)' }}>
-                      Priority: {ex.priorityScore.toFixed(4)}
+                      Priority: {formatDecimal(ex.priorityScore, 4)}
                     </p>
                   </div>
                 </div>

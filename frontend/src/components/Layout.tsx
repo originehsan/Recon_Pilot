@@ -21,77 +21,76 @@ export function Layout() {
       style={{ background: 'var(--color-bg-base)' }}
     >
       {/* ── Top Bar ─────────────────────────────────────────────── */}
+      {/* The bar's background/border still span the full viewport width;
+          only the CONTENT inside is constrained to max-w-7xl, matching
+          <main>'s content column below - so the wordmark's left edge and
+          the nav links' right edge line up with the page content's edges
+          instead of sitting at the raw viewport edges with a large empty
+          gap between them on wide screens. */}
       <header
-        className="sticky top-0 z-50 flex items-center justify-between px-8 h-14"
+        className="sticky top-0 z-50 h-14"
         style={{
           background: 'var(--color-bg-surface)',
           borderBottom: '1px solid var(--color-border)',
         }}
       >
-        {/* Wordmark */}
-        <div className="flex items-center gap-2.5">
-          <div
-            className="w-7 h-7 rounded-md flex items-center justify-center"
-            style={{ background: 'var(--color-brand-dim)', color: 'var(--color-brand)' }}
-          >
-            <Activity size={16} strokeWidth={2.5} />
-          </div>
-          <span
-            className="text-base font-bold tracking-tight"
-            style={{ color: 'var(--color-text-primary)' }}
-          >
-            ReconPilot
-          </span>
-          <span
-            className="text-xs font-medium px-1.5 py-0.5 rounded"
-            style={{
-              background: 'var(--color-brand-dim)',
-              color: 'var(--color-brand)',
-              border: '1px solid var(--color-brand-border)',
-            }}
-          >
-            BETA
-          </span>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex items-center gap-1">
-          {NAV_LINKS.map(({ to, label, icon: Icon, end }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={end}
-              className="group"
-              style={{ textDecoration: 'none' }}
+        <div className="max-w-7xl mx-auto h-14 flex items-center justify-between px-8">
+          {/* Wordmark */}
+          <div className="flex items-center gap-2.5">
+            <div
+              className="w-7 h-7 rounded-md flex items-center justify-center"
+              style={{ background: 'var(--color-brand-dim)', color: 'var(--color-brand)' }}
             >
-              {({ isActive }) => (
-                <span
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-default"
-                  style={{
-                    background: isActive ? 'var(--color-brand-dim)' : 'transparent',
-                    color: isActive ? 'var(--color-brand)' : 'var(--color-text-secondary)',
-                    border: isActive ? '1px solid var(--color-brand-border)' : '1px solid transparent',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      (e.currentTarget as HTMLSpanElement).style.background = 'var(--color-bg-elevated)';
-                      (e.currentTarget as HTMLSpanElement).style.color = 'var(--color-text-primary)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      (e.currentTarget as HTMLSpanElement).style.background = 'transparent';
-                      (e.currentTarget as HTMLSpanElement).style.color = 'var(--color-text-secondary)';
-                    }
-                  }}
-                >
-                  <Icon size={14} strokeWidth={2} />
-                  {label}
-                </span>
-              )}
-            </NavLink>
-          ))}
-        </nav>
+              <Activity size={16} strokeWidth={2.5} />
+            </div>
+            <span
+              className="text-base font-bold tracking-tight"
+              style={{ color: 'var(--color-text-primary)' }}
+            >
+              ReconPilot
+            </span>
+
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex items-center gap-1">
+            {NAV_LINKS.map(({ to, label, icon: Icon, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className="group"
+                style={{ textDecoration: 'none' }}
+              >
+                {({ isActive }) => (
+                  <span
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-default"
+                    style={{
+                      background: isActive ? 'var(--color-brand-dim)' : 'transparent',
+                      color: isActive ? 'var(--color-brand)' : 'var(--color-text-secondary)',
+                      border: isActive ? '1px solid var(--color-brand-border)' : '1px solid transparent',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLSpanElement).style.background = 'var(--color-bg-elevated)';
+                        (e.currentTarget as HTMLSpanElement).style.color = 'var(--color-text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLSpanElement).style.background = 'transparent';
+                        (e.currentTarget as HTMLSpanElement).style.color = 'var(--color-text-secondary)';
+                      }
+                    }}
+                  >
+                    <Icon size={14} strokeWidth={2} />
+                    {label}
+                  </span>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
       </header>
 
       {/* ── Page Content ────────────────────────────────────────── */}
@@ -102,14 +101,19 @@ export function Layout() {
       </main>
 
       {/* ── Footer ──────────────────────────────────────────────── */}
+      {/* Same max-w-7xl content constraint as the header/main, so the
+          footer text's left edge lines up with the wordmark and page
+          content above it instead of sitting flush at the viewport edge. */}
       <footer
-        className="px-8 py-3 text-xs"
+        className="py-3 text-xs"
         style={{
           borderTop: '1px solid var(--color-border)',
           color: 'var(--color-text-muted)',
         }}
       >
-        ReconPilot · Razorpay AI Buildathon 2026 · AI Finance Controller Track
+        <div className="max-w-7xl mx-auto px-8">
+          ReconPilot · Razorpay AI Buildathon 2026 · AI Finance Controller Track
+        </div>
       </footer>
     </div>
   );

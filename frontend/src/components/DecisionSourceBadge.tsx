@@ -55,6 +55,8 @@ const VARIANTS = {
       color: 'var(--color-teal)',
       border: '1px solid var(--color-teal-border)',
     },
+    /** P3: hover glow uses this badge's own semantic color at low opacity */
+    hoverGlow: '0 0 12px rgba(20, 184, 166, 0.25)',
   },
   ai: {
     label: 'AI-Assisted',
@@ -64,6 +66,7 @@ const VARIANTS = {
       color: 'var(--color-purple)',
       border: '1px solid var(--color-purple-border)',
     },
+    hoverGlow: '0 0 12px rgba(167, 139, 250, 0.25)',
   },
   human: {
     label: 'Human',
@@ -73,6 +76,7 @@ const VARIANTS = {
       color: 'var(--color-amber)',
       border: '1px solid var(--color-amber-border)',
     },
+    hoverGlow: '0 0 12px rgba(245, 158, 11, 0.25)',
   },
 } as const;
 
@@ -84,13 +88,23 @@ const SIZE_CLASSES = {
 
 export function DecisionSourceBadge({ value, size = 'md' }: Props) {
   const variant = classify(value);
-  const { label, icon: Icon, style } = VARIANTS[variant];
+  const { label, icon: Icon, style, hoverGlow } = VARIANTS[variant];
   const { pill, icon: iconSize } = SIZE_CLASSES[size];
 
   return (
     <span
       className={`inline-flex items-center font-semibold rounded-full whitespace-nowrap ${pill}`}
-      style={style}
+      style={{
+        ...style,
+        // P3: transition enables the hover glow to fade in/out smoothly
+        transition: 'box-shadow 150ms ease',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLSpanElement).style.boxShadow = hoverGlow;
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLSpanElement).style.boxShadow = '';
+      }}
     >
       <Icon size={iconSize} strokeWidth={2.5} />
       {label}

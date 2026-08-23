@@ -4,6 +4,7 @@
  */
 
 import type { LucideIcon } from 'lucide-react';
+import { useCountUp } from '../hooks/useCountUp';
 
 interface Props {
   label: string;
@@ -27,6 +28,12 @@ const ACCENT_COLORS: Record<NonNullable<Props['accentColor']>, string> = {
 
 export function StatCard({ label, value, icon: Icon, accentColor = 'gray', description }: Props) {
   const accent = ACCENT_COLORS[accentColor];
+
+  // P2: animate numeric values counting up from their previous value when polled
+  // Non-numeric values (strings, null, undefined) skip the animation entirely
+  const numericTarget = typeof value === 'number' ? value : 0;
+  const animatedNum   = useCountUp(numericTarget, 500);
+  const displayValue  = typeof value === 'number' ? animatedNum : (value ?? '—');
 
   return (
     <div
@@ -58,7 +65,7 @@ export function StatCard({ label, value, icon: Icon, accentColor = 'gray', descr
           className="text-3xl font-bold tracking-tight"
           style={{ color: 'var(--color-text-primary)' }}
         >
-          {value ?? '—'}
+          {displayValue}
         </span>
         {description && (
           <p
