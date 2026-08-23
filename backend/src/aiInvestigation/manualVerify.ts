@@ -59,7 +59,7 @@ async function main(): Promise<void> {
   const groundTruth = loadGroundTruth();
 
   console.log('Running the full pipeline (Stages 0-7)...\n');
-  const routedCases = runFullPipeline(settlements, orders, groundTruth);
+  const { routedCases } = runFullPipeline(settlements, orders, groundTruth);
 
   const allAiCases = routedCases.filter((c) => c.route === 'ai_investigation');
   const aiCases = limit !== null ? allAiCases.slice(0, limit) : allAiCases;

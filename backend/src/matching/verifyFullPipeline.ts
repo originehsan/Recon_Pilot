@@ -30,7 +30,7 @@ async function main(): Promise<void> {
   );
 
   console.log('Running the full pipeline (Stages 0-7)...\n');
-  const routedCases = runFullPipeline(settlements, orders, groundTruth);
+  const { routedCases } = runFullPipeline(settlements, orders, groundTruth);
 
   // ---------------------------------------------------------------------
   // Route distribution

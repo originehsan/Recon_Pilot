@@ -12,7 +12,8 @@
     "test": "vitest run",
     "verify-matching": "ts-node src/matching/manualVerify.ts",
     "verify-pipeline": "ts-node src/matching/verifyFullPipeline.ts",
-    "verify-ai": "ts-node src/aiInvestigation/manualVerify.ts"
+    "verify-ai": "ts-node src/aiInvestigation/manualVerify.ts",
+    "verify-decision-gate": "ts-node src/decisionGate/verifyDecisionGate.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

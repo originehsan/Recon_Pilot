@@ -377,7 +377,21 @@ async function seed(): Promise<void> {
   // This script is meant to be re-runnable from a clean slate: clear out any
   // previously-seeded rows first so re-running it replaces the dataset
   // instead of silently duplicating it on top of what's already there.
-  console.log('Clearing previously-seeded data from ingested_settlements and ledger_orders...');
+  //
+  // Also clears every downstream table that references ingested_settlements
+  // / ledger_orders ids (the decision-gate and audit layers, added in later
+  // prompts): those ids get reset to 1 on every re-seed, so a row left
+  // behind from a PREVIOUS seed generation would silently reference
+  // whatever settlement/order the NEW generation happens to recycle that id
+  // for - stale data masquerading as current data. There are no FK
+  // constraints in this schema to enforce this automatically, so it's done
+  // explicitly here.
+  console.log('Clearing previously-seeded data (settlements, orders, and every downstream decision-gate/audit table)...');
+  await pool.query('TRUNCATE TABLE audit_events');
+  await pool.query('TRUNCATE TABLE review_queue');
+  await pool.query('TRUNCATE TABLE resolutions');
+  await pool.query('TRUNCATE TABLE ai_investigations');
+  await pool.query('TRUNCATE TABLE match_candidates');
   await pool.query('TRUNCATE TABLE ingested_settlements');
   await pool.query('TRUNCATE TABLE ledger_orders');
 

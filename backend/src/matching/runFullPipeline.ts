@@ -13,11 +13,26 @@ import { calibrateThresholds } from './calibrateThresholds';
 import { findAmbiguityComponents } from './ambiguityComponents';
 import { assignComponent, AssignmentResult } from './hungarianAssignment';
 import { routeAllCases, RoutedCase } from './thresholdGate';
+import { Thresholds } from './calibrateThresholds';
 import { LedgerOrder, Settlement } from './types';
+
+export interface FullPipelineResult {
+  routedCases: RoutedCase[];
+  /**
+   * The calibrated auto-resolve/review thresholds computed internally
+   * (Step 3). Exposed because decisionGate/routingPolicy.ts's human_review
+   * priority scoring needs the same upper/lower bounds the pipeline itself
+   * used to route cases into that band - re-deriving them independently
+   * would risk drifting out of sync with what actually produced this
+   * result, and would recompute the whole labeling/calibration pass for no
+   * reason (this pipeline is a pure function of its inputs).
+   */
+  thresholds: Thresholds;
+}
 
 /**
  * Runs the full deterministic matching pipeline (Stages 0-7) and returns the
- * final routed cases.
+ * final routed cases plus the thresholds used to produce them.
  *
  * `groundTruth` is used only to LABEL residual candidates for Fellegi-Sunter
  * parameter estimation and threshold calibration (Steps 1-3) - it is
@@ -30,7 +45,7 @@ export function runFullPipeline(
   settlements: Settlement[],
   orders: LedgerOrder[],
   groundTruth: GroundTruthEntry[],
-): RoutedCase[] {
+): FullPipelineResult {
   // Stage 1: exact hash-join match + amount reconciliation.
   const stage1 = runExactMatch(settlements, orders);
 
@@ -77,11 +92,13 @@ export function runFullPipeline(
     .map((settlement) => ({ settlement, order: null, fsScore: null }));
 
   // Step 6: final routing.
-  return routeAllCases(
+  const routedCases = routeAllCases(
     stage1.exactMatches,
     stage1.ambiguousExactDuplicates,
     splitPaymentResults,
     [...hungarianResults, ...orphanResults],
     thresholds,
   );
+
+  return { routedCases, thresholds };
 }
