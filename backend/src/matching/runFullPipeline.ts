@@ -58,6 +58,24 @@ export function runFullPipeline(
   // Stage 3: exact subset-sum split-payment detection over Stage 1's amount mismatches.
   const splitPaymentResults = detectSplitPayments(stage1.amountMismatches);
 
+  // detectSplitPayments only considers orders with 2+ mismatched settlements
+  // (a split payment needs at least two legs to sum) - by its own design, it
+  // silently skips any order with exactly one mismatched settlement rather
+  // than emitting a result for it (see splitPaymentDetector.ts's own comment:
+  // "the caller is responsible for handling lone amount-mismatches
+  // separately"). Recompute that same per-order grouping here so those lone
+  // settlements are never simply absent from routedCases - they still need
+  // an order_id occurrence count of exactly 1 among amountMismatches to
+  // qualify (an order with 2+ mismatches that detectSplitPayments already
+  // covered, however it resolved, is not "lone").
+  const amountMismatchCountByOrderId = new Map<string, number>();
+  for (const { order } of stage1.amountMismatches) {
+    amountMismatchCountByOrderId.set(order.orderId, (amountMismatchCountByOrderId.get(order.orderId) ?? 0) + 1);
+  }
+  const loneAmountMismatches = stage1.amountMismatches.filter(
+    ({ order }) => amountMismatchCountByOrderId.get(order.orderId) === 1,
+  );
+
   // Step 1: label residual candidates against ground truth (training data for FS).
   const labeledCandidates = labelResidualCandidates(scoredResidualCandidates, groundTruth);
 
@@ -98,6 +116,7 @@ export function runFullPipeline(
     splitPaymentResults,
     [...hungarianResults, ...orphanResults],
     thresholds,
+    loneAmountMismatches,
   );
 
   return { routedCases, thresholds };

@@ -162,7 +162,7 @@ describe('finalizeCase', () => {
     expect(insertAuditEvent).toHaveBeenCalledTimes(1);
   });
 
-  it('calling finalizeCase twice with identical input is a no-op on the second call', async () => {
+  it('calling finalizeCase twice with identical input produces exactly one resolution row AND exactly one audit event', async () => {
     const { fakePool, resolutions } = createTestDb();
     vi.mocked(getPool).mockReturnValue(fakePool as never);
 
@@ -171,7 +171,36 @@ describe('finalizeCase', () => {
 
     expect(resolutions).toHaveLength(1); // still just one row - no duplicate
     expect(second.evidenceHash).toBe(first.evidenceHash);
-    // The audit trail still records the (no-op) re-finalization attempt.
+    // REVISED: a pure no-op re-finalization must NOT write a second audit
+    // event. Confirmed live before this fix: resolution id 1 in the real
+    // dev DB had 13 audit_events rows (12 of them `allNoOp: true`) from 12
+    // separate re-runs re-scanning the same already-resolved settlement -
+    // exactly this scenario, just repeated many more times. Only the first,
+    // genuine finalization gets logged.
+    expect(insertAuditEvent).toHaveBeenCalledTimes(1);
+  });
+
+  it('calling finalizeCase a third time (still identical) does not add a third audit event either', async () => {
+    const { fakePool, resolutions } = createTestDb();
+    vi.mocked(getPool).mockReturnValue(fakePool as never);
+
+    await finalizeCase(makeInput());
+    await finalizeCase(makeInput());
+    await finalizeCase(makeInput());
+
+    expect(resolutions).toHaveLength(1);
+    expect(insertAuditEvent).toHaveBeenCalledTimes(1);
+  });
+
+  it('logs a fresh audit event when a later call genuinely supersedes a prior no-op-checked resolution', async () => {
+    const { fakePool, resolutions } = createTestDb();
+    vi.mocked(getPool).mockReturnValue(fakePool as never);
+
+    await finalizeCase(makeInput({ finalStatus: 'matched' })); // 1st audit event
+    await finalizeCase(makeInput({ finalStatus: 'matched' })); // no-op, no audit event
+    await finalizeCase(makeInput({ finalStatus: 'rejected', reasonCode: 'correction' })); // genuine change, 2nd audit event
+
+    expect(resolutions).toHaveLength(2);
     expect(insertAuditEvent).toHaveBeenCalledTimes(2);
   });
 
@@ -200,13 +229,14 @@ describe('finalizeCase', () => {
     expect(resolutions.every((r) => r.final_status === 'matched')).toBe(true);
   });
 
-  it('concurrent calls for the same settlement result in exactly one resolution row, not two', async () => {
+  it('concurrent calls for the same settlement result in exactly one resolution row and one audit event, not two', async () => {
     const { fakePool, resolutions } = createTestDb();
     vi.mocked(getPool).mockReturnValue(fakePool as never);
 
     await Promise.all([finalizeCase(makeInput()), finalizeCase(makeInput())]);
 
     expect(resolutions).toHaveLength(1);
+    expect(insertAuditEvent).toHaveBeenCalledTimes(1);
   });
 
   it('passes the SAME connection to insertAuditEvent as the one used for the resolutions insert (same transaction)', async () => {

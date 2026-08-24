@@ -151,6 +151,29 @@ describe('routeDeterministicCase', () => {
     expect(enqueueForReview).toHaveBeenCalledWith(expect.objectContaining({ priorityScore: 0 }));
   });
 
+  it('amount_mismatch: enqueues for review at max priority (no FS score to normalize against)', async () => {
+    const settlement = makeSettlement({ id: 1, amount: 8000 });
+    const routedCase: RoutedCase = {
+      caseType: 'amount_mismatch',
+      settlements: [settlement],
+      order: makeOrder({ id: 500 }),
+      fsScore: null,
+      route: 'human_review',
+      reasonCode: 'settlement_amount_does_not_reconcile_no_split_solution',
+    };
+
+    const outcome = await routeDeterministicCase(routedCase, makeContext({ 1: 901 }));
+
+    expect(outcome).toBe('reviewed');
+    expect(finalizeCase).not.toHaveBeenCalled();
+    expect(enqueueForReview).toHaveBeenCalledWith({
+      matchCandidateId: 901,
+      reasonCode: 'settlement_amount_does_not_reconcile_no_split_solution',
+      exposureAmount: 8000,
+      priorityScore: 8000,
+    });
+  });
+
   it('throws for a caseType that requires AI investigation', async () => {
     const routedCase: RoutedCase = {
       caseType: 'ambiguous_duplicate',

@@ -231,30 +231,43 @@ export async function finalizeCase(input: FinalizeInput): Promise<ResolvedDecisi
       reasonCode: input.reasonCode,
     });
 
-    // Logged even when every settlement was a no-op: "the gate was asked to
-    // re-finalize this and correctly recognized it as already settled" is
-    // itself a meaningful auditable fact, not something to skip logging.
-    await insertAuditEvent(
-      {
-        entityType: 'resolution',
-        entityId: primary.resolutionId,
-        stage: 'decision_gate',
-        actorType: 'DECISION_GATE',
-        evidenceUsed: input.evidence,
-        aiRawOutput: aiRawOutputForAudit,
-        decisionGateOutput: {
-          settlementIds: input.settlementIds,
-          resolutionIds: outcomes.map((o) => o.resolutionId),
-          ledgerOrderId: input.ledgerOrderId,
-          finalStatus: input.finalStatus,
-          decidedBy: input.decidedBy,
-          reasonCode: input.reasonCode,
-          evidenceHash,
-          allNoOp: outcomes.every((o) => o.wasNoOp),
+    // REVISED (was: always logged, even on a pure no-op - see git history /
+    // prior comment here for the original reasoning). That produced
+    // unbounded audit-log growth in practice: every re-run's re-scan of an
+    // already-resolved settlement (see matching/dbLoader.ts's
+    // excludeResolved option, added alongside this fix, for the real root
+    // cause of WHY re-scans happen at all) re-triggered finalizeCase for the
+    // same settlement, and every one of those no-op calls wrote a full
+    // audit_events row - confirmed live: resolution id 1 alone had 13 rows,
+    // 12 of them `allNoOp: true` from 12 separate re-runs of an unchanged
+    // decision. A pure re-confirmation with zero actual change is not a new
+    // decision - only write the audit event when at least one settlement in
+    // this call had a genuine outcome (freshly created or superseded).
+    const allNoOp = outcomes.every((o) => o.wasNoOp);
+
+    if (!allNoOp) {
+      await insertAuditEvent(
+        {
+          entityType: 'resolution',
+          entityId: primary.resolutionId,
+          stage: 'decision_gate',
+          actorType: 'DECISION_GATE',
+          evidenceUsed: input.evidence,
+          aiRawOutput: aiRawOutputForAudit,
+          decisionGateOutput: {
+            settlementIds: input.settlementIds,
+            resolutionIds: outcomes.map((o) => o.resolutionId),
+            ledgerOrderId: input.ledgerOrderId,
+            finalStatus: input.finalStatus,
+            decidedBy: input.decidedBy,
+            reasonCode: input.reasonCode,
+            evidenceHash,
+            allNoOp,
+          },
         },
-      },
-      connection,
-    );
+        connection,
+      );
+    }
 
     await connection.commit();
     return decision;

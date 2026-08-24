@@ -1,1401 +1,1401 @@
 [
   {
-    "entity_id": "pay_OwTwcp9no7Jxvn",
-    "order_id": "order_E632IIFQ59RF",
+    "entity_id": "pay_gIDxqNmwdZaWFM",
+    "order_id": "order_REVXUIFUOK4U",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_vhyDQttdurlxDv",
-    "order_id": "order_0IWQ2YXMKAVH",
+    "entity_id": "pay_Gp1zKqaYBwAYdh",
+    "order_id": "order_7FGBIC09ZD8A",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_08oVxoF9UU8AqZ",
-    "order_id": "order_62G53OG3HY1M",
+    "entity_id": "pay_JCxA87REMrUjLL",
+    "order_id": "order_Z4TRA4W0ZFXQ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_IKofycslKTQ8XJ",
+    "order_id": "order_ECTWGRXYQH2S",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_0qlMKdHM0sqCZL",
+    "order_id": "order_M0JVGB87DNFY",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_OqEuAtH2pLXSR3",
+    "order_id": "order_4RS2WXUP36EM",
     "category": "CORRUPTED_TRUNCATED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_tDUK75Tp8O2d2D",
-    "order_id": "order_F9UWW4SUC13P",
+    "entity_id": "pay_r4wm69kZiIhKKa",
+    "order_id": "order_5NHEF11PQ8UV",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Manual resubmission per customer request; verify against original before crediting.",
+    "isTrueCandidate": false
+  },
+  {
+    "entity_id": "pay_a9AUubLCX9ya0V",
+    "order_id": "order_5NHEF11PQ8UV",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Settlement matches the sole confirmed payment attempt for this order.",
+    "isTrueCandidate": true
+  },
+  {
+    "entity_id": "pay_6WYG9u2hMWfUnB",
+    "order_id": "order_N4NY16NS9UVA",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_LluMM1k4in8nw9",
+    "order_id": "order_1VTXYF79CXBY",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_CrbjAeF0yXM5w3",
+    "order_id": "order_H3NK1JQOR2RI",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_OVOJFSOi4R2fsx",
+    "order_id": "order_N78Z581RWP2R",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_zezs4bsOE8It9t",
+    "order_id": "order_QC53BZ8MZFFQ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_L122MY7xRwmZY1",
+    "order_id": "order_D3LL1MOMFGUQ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_QtQvx7xcvJvrhN",
+    "order_id": "order_T12MVFAMH32B",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_mVtLGUPwg8Uvpl",
+    "order_id": "order_OYQHJFFW0P98",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_0Zew6UR8Hs3e6D",
+    "order_id": "order_B2Z1D2J11TJN",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Oc2sZqOUioXLeX",
+    "order_id": "order_67LUM6HVTNG4",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_H8nEDW6UJPhCYZ",
+    "order_id": "order_C4SS9KRPTROV",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Sy75HIqV17OY9R",
+    "order_id": "order_W1OZDVP39UIU",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": null,
+    "order_id": "order_ZSK2KZ78OVQE",
+    "category": "UNMATCHED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_cj87n8UuxIt3B7",
+    "order_id": "order_X3FQJMRRI9WH",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_RoQ15W9ziMuloq",
+    "order_id": "order_B4ORZIGYZNZD",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_F4YMEUFd8y5EIJ",
+    "order_id": "order_RX9J9DR4XF0Z",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_PVkXDu3rYgKrC2",
+    "order_id": "order_NT6EDX71FQXK",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_2S0HWkJCwVZ2re",
+    "order_id": "order_GY0A4W1UXR5X",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_eJWGCmX1cTKFwu",
+    "order_id": "order_4PICCP7K0M89",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_7us8O9Nr3cmI8o",
+    "order_id": "order_EP14S0UVXBCU",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": null,
+    "order_id": "order_SZRBTC317A09",
+    "category": "UNMATCHED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Cpvcs4hidGsbah",
+    "order_id": "order_HW0DFIO6CEKH",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_aFRwSutHbfqJnH",
+    "order_id": "order_JLNL80EFQ2SB",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_eO8nHeDVOlogQj",
+    "order_id": "order_0V64CJ86XKRE",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ysZWPVkkFh3IXI",
+    "order_id": "order_OOECF7ITY1O7",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": null,
+    "order_id": "order_HS7FLIKI4BT6",
+    "category": "UNMATCHED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_uZz7RWdHTaRLC4",
+    "order_id": "order_8HS1MH761VPA",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_SZor5YmOH2jIQI",
+    "order_id": "order_NNW366IH2JR8",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 2, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_aiaSnNnYoPiDwQ",
+    "order_id": "order_NNW366IH2JR8",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_GELPsmApyQud43",
+    "order_id": "order_1CN38RA0MO6W",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_CbIpDoadx9QKLt",
+    "order_id": "order_SJLH7QNXKU3J",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_dsZMoGdncJTbIv",
+    "order_id": "order_BC1S5KAHT2UR",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ph1lCensKeXd1d",
+    "order_id": "order_S5CJTKKBXP5V",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_1T6yFdLYpEyllk",
+    "order_id": "order_SSCCQVL6YPQ3",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_KtlWstFEE9siwS",
+    "order_id": "order_Y7X7H8FL5VXQ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_VWT110C7bjO1NE",
+    "order_id": "order_LQPQV53JO8IN",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_BqSpq1cC6mIWc0",
+    "order_id": "order_MPYO34PMSEKP",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_h2qlbPQwHGWkoi",
+    "order_id": "order_057SVYANTSEB",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_33GbEYzQzh1rSJ",
+    "order_id": "order_OZQ8K786N7ML",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Manual resubmission per customer request; verify against original before crediting.",
+    "isTrueCandidate": false
+  },
+  {
+    "entity_id": "pay_IrV2Y106CBqPdf",
+    "order_id": "order_OZQ8K786N7ML",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Original transaction cleared successfully; no resubmission required.",
     "isTrueCandidate": true
   },
   {
-    "entity_id": "pay_rDh4FCxOURVoeP",
-    "order_id": "order_F9UWW4SUC13P",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Manual resubmission per customer request; verify against original before crediting.",
-    "isTrueCandidate": false
-  },
-  {
-    "entity_id": "pay_xnZgjAZxFUWwX6",
-    "order_id": "order_TZ0SAN3XXAYB",
+    "entity_id": "pay_3a388YOaYQWZKF",
+    "order_id": "order_W7POAQC3JIBN",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": null,
-    "order_id": "order_ANM7BDFOVFZB",
-    "category": "UNMATCHED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_jG2X2GI1cfmiWg",
-    "order_id": "order_P72PF3N8EHKA",
+    "entity_id": "pay_jNRRmVhgUl5WrG",
+    "order_id": "order_JFUNFX9PXHCO",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_JfYaLNKH5QkY92",
-    "order_id": "order_K05RVMX8DVUX",
+    "entity_id": "pay_cbyO5knLmtwRiF",
+    "order_id": "order_MDYT5QGY7DUR",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_VphXyNu6Ax44Ur",
-    "order_id": "order_LAVT9GCOZPBK",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_InqozCU1PaEBPj",
-    "order_id": "order_56FVOZDTI2BD",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_FnCzwJwSgQTnlZ",
-    "order_id": "order_6L69Z58L0O9L",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_nCrZrsr6ESezjf",
-    "order_id": "order_77TM9PSC205G",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_gi4tI7Zf8sBMCg",
-    "order_id": "order_REK32V5TTQT8",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_xlIyWYZPrLeKA0",
-    "order_id": "order_JGYDBLLZ6LMW",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_edZXnXiWSXbGCV",
-    "order_id": "order_ZCU7Y1ULWNHY",
+    "entity_id": "pay_mTakb88DuwYTJM",
+    "order_id": "order_1CU78V3E8U6C",
     "category": "ON_HOLD",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": null,
-    "order_id": "order_0Z2M8G3G3A54",
-    "category": "UNMATCHED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_LnUcBNYZey7VLx",
-    "order_id": "order_96EDTNKNVFNN",
+    "entity_id": "pay_pFty4Z7bprNmek",
+    "order_id": "order_LRVQBBL3JVUX",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_PUlFpMq5Lj0OoG",
-    "order_id": "order_ARYAZF50BJZZ",
+    "entity_id": "pay_pYd5b9y6Fvhwc2",
+    "order_id": "order_HJYHSHDDL0D8",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_nvFJD0CU2r5Kep",
-    "order_id": "order_12QYSF2FPB4N",
+    "entity_id": "pay_exyhBcqqmMPFb6",
+    "order_id": "order_VZWJL5NKRLY6",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_Y4jXVoVmyIQSEf",
-    "order_id": "order_4WLXRMG6NDPI",
+    "entity_id": "pay_7JZHEcT3upyHli",
+    "order_id": "order_4R6DFT4PDM16",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_b1sRwTBejUQkGx",
-    "order_id": "order_RZFWWJ78MT72",
+    "entity_id": "pay_N3NNJULupsIyoz",
+    "order_id": "order_42DON3L751T4",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Oyj2BwNyKGXFNF",
+    "order_id": "order_1KVAMNLROXS5",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_NFwxriQB3vWENw",
+    "order_id": "order_OW589URFBWXH",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_1EHhcOjqgU9BRY",
+    "order_id": "order_IQOTC3JZSOHK",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Y3UffQRhB6zmDp",
+    "order_id": "order_7XXKU23L2EHT",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_uieVQ4h5ENrEoO",
+    "order_id": "order_DDR7VR75YT6O",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_oiQZHu5EbLuUaS",
+    "order_id": "order_RRV0ZCWSA9F2",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ieqvHsKTEiEzvk",
+    "order_id": "order_W681O6LTAKKP",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Qz3ytrgTdqoskt",
+    "order_id": "order_08AIOTLUGPRX",
     "category": "CORRUPTED_SUBSTITUTED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_xeWAX3Ny9nCbQv",
-    "order_id": "order_KFC8U2V3C5BF",
-    "category": "CLEAN_EXACT",
+    "entity_id": "pay_1rG7y5ZpG3w3gB",
+    "order_id": "order_W7TL9B9ZXG7I",
+    "category": "CORRUPTED_TRUNCATED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_errXqcKSFBTUKw",
-    "order_id": "order_TG2CB09L35ZW",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Payment confirmed by gateway callback; single settlement recorded for this order.",
-    "isTrueCandidate": true
-  },
-  {
-    "entity_id": "pay_2shxTXG2moaR73",
-    "order_id": "order_TG2CB09L35ZW",
+    "entity_id": "pay_6sPqIrK57EcjPB",
+    "order_id": "order_FAV5MJ9SWN1D",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Manual resubmission per customer request; verify against original before crediting.",
     "isTrueCandidate": false
   },
   {
-    "entity_id": "pay_8dC7IItCvpUhKr",
-    "order_id": "order_JWF38E24TN20",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Manual resubmission per customer request; verify against original before crediting.",
-    "isTrueCandidate": false
-  },
-  {
-    "entity_id": "pay_UEm2HJE7QEsVPn",
-    "order_id": "order_JWF38E24TN20",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Settlement matches the sole confirmed payment attempt for this order.",
-    "isTrueCandidate": true
-  },
-  {
-    "entity_id": "pay_0ftz3JGduZBrsi",
-    "order_id": "order_EP82G7BBH0AQ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_BPaeIl8ckEOLHd",
-    "order_id": "order_WFY1QDP03VWJ",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_m9uyv9uZJ7DRM3",
-    "order_id": "order_7G57V1LM7PW7",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_gUfeO5PtSpRFUs",
-    "order_id": "order_H2D99BWZOLKE",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_fyLfenFkhbRIwr",
-    "order_id": "order_2ZC9QSKIJRVN",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_OjclLxLIgzANAr",
-    "order_id": "order_CQPWSB2N61UF",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_7Uv1nzSaiJUGr9",
-    "order_id": "order_12JBBZX539FZ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_LvU96EgdC7CkBg",
-    "order_id": "order_VY7RB0BZS84V",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 2, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_A2rzhhejFWOJDs",
-    "order_id": "order_VY7RB0BZS84V",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 2 of 2; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_yZXS48ck5JdFfr",
-    "order_id": "order_P1TVJCIX2VD0",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_Py2ZySbmDcOH8w",
-    "order_id": "order_J4ZGOI00V3L7",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_t6UlesYZgKwUJE",
-    "order_id": "order_Z5GWIFM15A76",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_6f0Pk92IBfTwgx",
-    "order_id": "order_KWCIWO6CX4VY",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_olYHjDusofPbXv",
-    "order_id": "order_8UO367WLBEKL",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_JQ6oAJ9gXjAcuu",
-    "order_id": "order_OW1QJ4WP9P97",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_vB2xpDixO9AWy9",
-    "order_id": "order_6OPU8FGZVURG",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_wa2tvwDqiwqZ3L",
-    "order_id": "order_5X6P6C3M912F",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_G3t0WdqgAemDF6",
-    "order_id": "order_XZAOW3J3U03I",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_57EpyWQgev6MVj",
-    "order_id": "order_SBNH27QFWKEV",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_3N6dP10hZdsHvP",
-    "order_id": "order_QUFZ4JQULCMC",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_f3F7vn5kl10zba",
-    "order_id": "order_LSAZL2PGL4QZ",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 2, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_4NBVHfsIQL89QA",
-    "order_id": "order_LSAZL2PGL4QZ",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 2 of 2; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_rxoIssWo6Y968R",
-    "order_id": "order_VANTVO0OLV3P",
+    "entity_id": "pay_rEBdEo32lnxxBR",
+    "order_id": "order_FAV5MJ9SWN1D",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Payment confirmed by gateway callback; single settlement recorded for this order.",
     "isTrueCandidate": true
   },
   {
-    "entity_id": "pay_RMTDisRznGCNIa",
-    "order_id": "order_VANTVO0OLV3P",
+    "entity_id": "pay_MZ7dL2FCs3elxr",
+    "order_id": "order_HWI5ZWB1POQR",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_vGzVTTYq0PJFKp",
+    "order_id": "order_VZPSTT5FKRFK",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Duplicate settlement flagged by risk review, pending confirmation.",
     "isTrueCandidate": false
   },
   {
-    "entity_id": "pay_BgwXpjlRQ3ZW9U",
-    "order_id": "order_YTMIV1CRLPZO",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_MxCklPkQNq3Be7",
-    "order_id": "order_45AC992WFMSA",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_4vRGvt6KaZsGt3",
-    "order_id": "order_J1Y015RLYLLX",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_J1IluW6htPvHaA",
-    "order_id": "order_U5Y2O5M1WW9V",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_x9YhbBumqnTddt",
-    "order_id": "order_QBBEPNBS8RAD",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_eIjjfHNcZADynF",
-    "order_id": "order_0I4QD1W7GGRF",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_rNR4H9j0r2u8Nr",
-    "order_id": "order_LFZNWIP5FW8S",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_m2ron5J6Os5L0t",
-    "order_id": "order_CZ413LU3IVJJ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_GshiS6Hw7DVMyK",
-    "order_id": "order_9M4FQORTJREE",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_tUxZGdCn24HKgK",
-    "order_id": "order_4THTYOCWUSNP",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_jyTyZDVAUScoBs",
-    "order_id": "order_EQ7RUJDGDHSY",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_7NYynDRXTcUGoA",
-    "order_id": "order_0S20NS6DGQC9",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Manual resubmission per customer request; verify against original before crediting.",
-    "isTrueCandidate": false
-  },
-  {
-    "entity_id": "pay_URiJkswBdSMIJs",
-    "order_id": "order_0S20NS6DGQC9",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Settlement matches the sole confirmed payment attempt for this order.",
-    "isTrueCandidate": true
-  },
-  {
-    "entity_id": "pay_AKFxjV0kxDuml1",
-    "order_id": "order_6UDBCFRTD99S",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_C4qPd2es75zjag",
-    "order_id": "order_IN3K7PWP23CM",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 2, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_j4qKdOvgUlCfhe",
-    "order_id": "order_IN3K7PWP23CM",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 2 of 2; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_7NpSodEnYvFwuj",
-    "order_id": "order_NBVYQWLZZ1OJ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ePpMBMrvkuEkbX",
-    "order_id": "order_E5OSEQL94FU5",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_3hSffqAdmQfHBr",
-    "order_id": "order_CKMKL217AITP",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_jGIJeYGlOYdGba",
-    "order_id": "order_I8I4D415XJJ1",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_Z5KJjCfnWTFAgX",
-    "order_id": "order_N4GSY4Y5VKVK",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_8MK5ZgXCHP6YVG",
-    "order_id": "order_QAUDHSL3EYDW",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_drfmruAbztZGRf",
-    "order_id": "order_EHEKJQW266XZ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_W35o8nf3KFO7UR",
-    "order_id": "order_A86B3OEMHE92",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_uYdDZrYI9gBGkn",
-    "order_id": "order_YUPUA3DFHO1L",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_uSSf1HKS6ZU8vb",
-    "order_id": "order_Z1L2NE0J8TH4",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_I1gPH5XlO0UgqD",
-    "order_id": "order_3XQ9R3TJMLX1",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_PiKZIOU01wwBRr",
-    "order_id": "order_Q3BP0WZIHVDW",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ojVjzIVG5Ic5t5",
-    "order_id": "order_HV14GX9KKLBK",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_rs2TXaWw1UHEPq",
-    "order_id": "order_ZR0SG3A0JNVL",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_YZvheUvs1qUr1K",
-    "order_id": "order_FVB0S1FRM3M4",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_8mvV7N0WOBpfxb",
-    "order_id": "order_T03MHOBDDIZW",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_QUb9KaXIszTF95",
-    "order_id": "order_BZGLM5ZCTL7K",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ptLvYmqyu5e8iH",
-    "order_id": "order_9XQKIM27TE0H",
+    "entity_id": "pay_tZJmsn4RcxffU6",
+    "order_id": "order_VZPSTT5FKRFK",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Payment confirmed by gateway callback; single settlement recorded for this order.",
     "isTrueCandidate": true
   },
   {
-    "entity_id": "pay_XkE9mZnqhw87o8",
-    "order_id": "order_9XQKIM27TE0H",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Manual resubmission per customer request; verify against original before crediting.",
-    "isTrueCandidate": false
-  },
-  {
-    "entity_id": "pay_McZJ2rLdlMP8p3",
-    "order_id": "order_ET0YXDM3OMQT",
+    "entity_id": "pay_huAkohPEHEZMKZ",
+    "order_id": "order_A2E45Z7F3OY1",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_0jgtGrnunaemV2",
-    "order_id": "order_GR1GHCPU6WVA",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ZFg47APdGCIciZ",
-    "order_id": "order_N4CJ0VP4U6G2",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_9L2lrvkxbf2H3t",
-    "order_id": "order_VKHJDSPRRDZA",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_K08bJIR5OaAwzG",
-    "order_id": "order_AIAME4FVX188",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_M7xgYSow3cbkdf",
-    "order_id": "order_YQI9LKK6YP0M",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_GZ16m39FIQpYPe",
-    "order_id": "order_1CC7DEKFX9NI",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 3, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_uThOcCw6EtHEtR",
-    "order_id": "order_1CC7DEKFX9NI",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 2 of 3, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_YMqmzva9Us41wc",
-    "order_id": "order_1CC7DEKFX9NI",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 3 of 3; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_flHCksFbnk9qAM",
-    "order_id": "order_OHIE5RXENFAV",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Settlement matches the sole confirmed payment attempt for this order.",
-    "isTrueCandidate": true
-  },
-  {
-    "entity_id": "pay_hmg1laxZjumpFo",
-    "order_id": "order_OHIE5RXENFAV",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Duplicate settlement flagged by risk review, pending confirmation.",
-    "isTrueCandidate": false
-  },
-  {
-    "entity_id": "pay_btg2UuOXtf2sB5",
-    "order_id": "order_QN6DNV0VS0FP",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_baFAbhHD1c08cA",
-    "order_id": "order_V3QCYSET1U8F",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_A0d71sDcbIQRJM",
-    "order_id": "order_KA4IYYKVAKOQ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_TPYmzCfB6Bn183",
-    "order_id": "order_XZMMPLVSMXON",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_KIJFB8KFUTcpXM",
-    "order_id": "order_5363ZYSZNA53",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_pjtsbeHVJRnnUl",
-    "order_id": "order_GK93QOM71KET",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_0s8p6LVE6XD6It",
-    "order_id": "order_20CPZZ8WN6HR",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": null,
-    "order_id": "order_G1PUCTXYGWE0",
-    "category": "UNMATCHED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_AaozamtGoWGXig",
-    "order_id": "order_KU880H42EFHG",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 2, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_KcPudHq6hDjyWy",
-    "order_id": "order_KU880H42EFHG",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 2 of 2; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_eCj43meImYlJPP",
-    "order_id": "order_DDC6ZHY56VO5",
+    "entity_id": "pay_bNInaw23cSgUwA",
+    "order_id": "order_DTYI1YZ9YYS9",
     "category": "CORRUPTED_TRUNCATED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_MV6fFcaq1jdUXx",
-    "order_id": "order_QP7TM2BJCET5",
+    "entity_id": "pay_pQsy5YCAjZmenm",
+    "order_id": "order_8LF136FM3PK9",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_e1LHen1yJtAHAy",
-    "order_id": "order_X5VH6LTUPV0R",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_I0ioJlkZre224F",
-    "order_id": "order_ZEBXD4BS5XWX",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_sGpwRXPNTNdp4f",
-    "order_id": "order_PC8SBUU2X1NM",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_z3sGMsJq1vwhvQ",
-    "order_id": "order_YXXGMKJXRHAB",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_xNWNCJY7WY1Xr1",
-    "order_id": "order_U08YCS3H6NBT",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_u6jDBx6hwlUZ6b",
-    "order_id": "order_4A0RBV9K46LP",
-    "category": "ON_HOLD",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_llMzC5iS251v53",
-    "order_id": "order_KLVUY0RXXZXJ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_AZEBD2OlqGYVjG",
-    "order_id": "order_17GV39FL9KJZ",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_HC9C8lm3CXCIaI",
-    "order_id": "order_ODEIKEBVWT68",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_mVZs8GEa2JWCb5",
-    "order_id": "order_WXP1XAWD20Q8",
+    "entity_id": "pay_tbaJnfW08dYURW",
+    "order_id": "order_BHXLOQYWK7MA",
     "category": "CORRUPTED_TRUNCATED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_y43Q02fnOcRAPB",
-    "order_id": "order_ORTLMK413GBA",
+    "entity_id": "pay_k6XWVfsb8WmsvV",
+    "order_id": "order_XCLG7WZA933R",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Retry after gateway timeout, original attempt unconfirmed.",
     "isTrueCandidate": false
   },
   {
-    "entity_id": "pay_WRRtkTcrrIMZxI",
-    "order_id": "order_ORTLMK413GBA",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Original transaction cleared successfully; no resubmission required.",
-    "isTrueCandidate": true
-  },
-  {
-    "entity_id": "pay_1inYQc45Dgu5qb",
-    "order_id": "order_JHHSXQ9AWZNI",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_effY6bSlsrUTLa",
-    "order_id": "order_PA45XTGB1BRM",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ImBc4bvCEdBI9w",
-    "order_id": "order_ZYII3KRK0R1G",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_XRYApDlBDv1dlj",
-    "order_id": "order_OAU04256EOE7",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_oH5Qhfr9h1cLrG",
-    "order_id": "order_RDCADHY13NNM",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 3, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_praJzS0oLG4PB4",
-    "order_id": "order_RDCADHY13NNM",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 2 of 3, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_9V3SbZxdw4F0xj",
-    "order_id": "order_RDCADHY13NNM",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 3 of 3; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_WSXmTKblmUX7Kf",
-    "order_id": "order_WNQY4QRXTHYD",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": null,
-    "order_id": "order_DJBK9GZ9ZDZX",
-    "category": "UNMATCHED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_YkWHvfGoI6PEnh",
-    "order_id": "order_L8DDD0AY8MLR",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_uEW75Ctl8mvwVC",
-    "order_id": "order_0DCHQ1SUSA93",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_JKcM2hqkvPPa04",
-    "order_id": "order_LI7IRBN6AQ6U",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_5VBYwqijGlw3tU",
-    "order_id": "order_RD3OQ16MXHJ4",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_5cEVgB1COwhaoV",
-    "order_id": "order_LWXH3K607PR4",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_W2OIsy8Tu92JsX",
-    "order_id": "order_6HU4HKVKL9NE",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_qJKBpNROqudHgI",
-    "order_id": "order_3MACCI65LTRH",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_H2qcsnk48PHdTo",
-    "order_id": "order_6F1EFEMLHHZQ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_1voAWUAp1IEh1P",
-    "order_id": "order_HMME423N7LRQ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_3hfbWcYgMIKZPt",
-    "order_id": "order_S2ABS1ZTCKX6",
-    "category": "ON_HOLD",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_vkxFWoU0jdHPgL",
-    "order_id": "order_RMU7KSNG9DUU",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_HIwsSTgbRnWTe7",
-    "order_id": "order_EIXHYUQLPW2H",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ZuEiWQsUC39JCQ",
-    "order_id": "order_2OR0DP9FCS5Z",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_ic6n9pQ96SnZfh",
-    "order_id": "order_7M47G5NMG1G8",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_rGk8ADhFbdBBH4",
-    "order_id": "order_G3TWFCZRD104",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_N8oTh7e2SYYoxx",
-    "order_id": "order_51EZNZYXH2L7",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_0TzHe1LxbLQLGJ",
-    "order_id": "order_AUWP297NI0JJ",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_e27UpXS2OentYy",
-    "order_id": "order_9JURD8JW0CWV",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_cc5qjvMIDEx1B1",
-    "order_id": "order_M1U7LELW2W0Q",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_li6iYhA5BlMbCd",
-    "order_id": "order_NLNE5SPQU1XC",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_kmVfEVJSXPMAg1",
-    "order_id": "order_V1Q9LLXUFF7P",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_jnemJXSYq35NTa",
-    "order_id": "order_ULSKMUE9VL34",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_N6yCmwO4KUO9Q1",
-    "order_id": "order_YGQJCL2U51UK",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_2VDIFucY6LlgMP",
-    "order_id": "order_G6TCA4A7A7M1",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_sTHxHyV0odew7h",
-    "order_id": "order_GHFY0S713JVY",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_m5DuBMcL2vhAyc",
-    "order_id": "order_6ZLAKOKSYJ0Q",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_26j4nUxzbeyK6r",
-    "order_id": "order_YKZLVPIP6L9N",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_m1AqoXk0D0AU1s",
-    "order_id": "order_BIHNU6KF8UCO",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_0lRPxqIbGtztry",
-    "order_id": "order_HVEMRAYZJCSI",
-    "category": "CORRUPTED_TRUNCATED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_af4yQqT3bo12OX",
-    "order_id": "order_VLBKECM425PH",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_UVmRoFnQZ3qZ2I",
-    "order_id": "order_LRN3HXSWLEAF",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_z9dWrTyuw4pIei",
-    "order_id": "order_9LHUVMQSW1F8",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": null,
-    "order_id": "order_NN8Y1D5Z91WE",
-    "category": "UNMATCHED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_XH891zUW0mtOpJ",
-    "order_id": "order_1WUDAWBUEOVO",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 2, remainder follows.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_XizFPQTN4MLXzm",
-    "order_id": "order_1WUDAWBUEOVO",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 2 of 2; order now fully settled.",
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_hYYBQdeUGuBfHP",
-    "order_id": "order_RV5NPM62X55D",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_7nSdnIhGuvQftz",
-    "order_id": "order_7UTKLWJ21XC9",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_vmDqT93BTwjs3Q",
-    "order_id": "order_PZ45Q64WRERO",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_juML6YIuyhEGXC",
-    "order_id": "order_X9Z0SA3H16TW",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_jjNI5Ui8wZp0ki",
-    "order_id": "order_112Y2HGFM2GA",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": null,
-    "order_id": "order_VQHHOGVD8N60",
-    "category": "UNMATCHED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_R1j8DuBzLBOEey",
-    "order_id": "order_Q1L2N68JVRZY",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_gR35cnNQPfVFuw",
-    "order_id": "order_ZSN7Q6MUM6A9",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_8i3tS10co2nvqO",
-    "order_id": "order_8NPNY1IW4AV3",
-    "category": "CORRUPTED_SUBSTITUTED",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_AZ5l9q9nBnqPLn",
-    "order_id": "order_LVE1RRYL8A6N",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_mqstgoQDdKXoLn",
-    "order_id": "order_NZJIQSJWZJQL",
+    "entity_id": "pay_ryu4Fh136BiOXf",
+    "order_id": "order_XCLG7WZA933R",
     "category": "AMBIGUOUS_DUPLICATE",
     "narration": "Settlement matches the sole confirmed payment attempt for this order.",
     "isTrueCandidate": true
   },
   {
-    "entity_id": "pay_s3vos9NKSiMJG1",
-    "order_id": "order_NZJIQSJWZJQL",
-    "category": "AMBIGUOUS_DUPLICATE",
-    "narration": "Manual resubmission per customer request; verify against original before crediting.",
-    "isTrueCandidate": false
+    "entity_id": "pay_3YBY7RErj6s3TO",
+    "order_id": "order_L3FE6WLLLWCF",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_b2GdGPToEcDkGv",
-    "order_id": "order_4YSSWR84BYTK",
+    "entity_id": "pay_Ugd3cyMoTJTYz9",
+    "order_id": "order_EL09ERWJCYVB",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_5S8sggPJK8G11D",
+    "order_id": "order_9XDU3YPOY27P",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_JM2UE35pBGD6TP",
+    "order_id": "order_9FDQ5XERSJDW",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_hHkHgdj8RO3V5B",
+    "order_id": "order_H7K7D1SXM4LZ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Hsrey40v8o8bvQ",
+    "order_id": "order_T0U7H3AYRZN4",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_7q6iRqAHo0QTAp",
+    "order_id": "order_IXBT3J3DEZS6",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_SKxsPgRZ706Tke",
+    "order_id": "order_HJ00IC5KNTPS",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_KHDkWEXI6qquJq",
+    "order_id": "order_MGC7KKBQVOML",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_QQACGJpM0Tbv25",
+    "order_id": "order_N29UUEOXZWMN",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 2, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_A70EcVF07J9ZgQ",
+    "order_id": "order_N29UUEOXZWMN",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_iDL37XDIYmMAuU",
+    "order_id": "order_UQRHGPRI3B15",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_6W5cWfKIF7n2nv",
+    "order_id": "order_XGQF6BQ6C039",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_1Y51Bn6B52slrt",
+    "order_id": "order_2GDJ7GD1KIHA",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_boPvQnJwds67sy",
+    "order_id": "order_2YUQFXP77O8B",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_y09MHFcNegM3fL",
+    "order_id": "order_T6WD5EKJAJTZ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_oyoZZt1LfGeael",
+    "order_id": "order_XABI2A7Y2X8O",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_TtFhoHp1SBJXVA",
+    "order_id": "order_ONYN67FSXE07",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_hAV6BbE5n4sZH0",
+    "order_id": "order_OL5SIY6Y3VNP",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": null,
+    "order_id": "order_KGIT4LTAD78I",
+    "category": "UNMATCHED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_vBFULPGQDLBFSh",
+    "order_id": "order_XZQ9GNRH0NHG",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_VM8hsDfHqWXQg6",
+    "order_id": "order_DWLOFXCCCH34",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 3, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_shw5eYye4lA0RO",
+    "order_id": "order_DWLOFXCCCH34",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 2 of 3, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_jLDRTtpomp50Nm",
+    "order_id": "order_DWLOFXCCCH34",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 3 of 3; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_eyZXrGtukAdjUk",
+    "order_id": "order_6LE2GR8X8W0I",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 3, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_nsiGrTq7Z3yfDb",
+    "order_id": "order_6LE2GR8X8W0I",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 2 of 3, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_DIMdnZ9axrowWf",
+    "order_id": "order_6LE2GR8X8W0I",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 3 of 3; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_R5rO9u2f2XhLUw",
+    "order_id": "order_8CC42DNXG8BY",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_DeZM5dUIRT4Bd2",
+    "order_id": "order_RAVDF5BUD8Q6",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_qaDcw2qMZZuZNY",
+    "order_id": "order_EX2K6JRJDXQC",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_VGkq55q7GsOT9x",
+    "order_id": "order_MA3O8474B33P",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Xd8JFRp50z9pKx",
+    "order_id": "order_IRF0X9NVYHJN",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Dp3Gzqz5KKdRb0",
+    "order_id": "order_IJRK80O3QSMS",
     "category": "CORRUPTED_SUBSTITUTED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_VAbtnskrbZ3QlE",
-    "order_id": "order_5Z9W077YLV7S",
+    "entity_id": "pay_vrNjiddKwWXGpD",
+    "order_id": "order_C9X081SGNXVX",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_F4gWFEnpI1fYdt",
-    "order_id": "order_ULNOS57TS33E",
+    "entity_id": "pay_chYyJAcSYWnVIA",
+    "order_id": "order_HHPTATEFGF7B",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_T560jBSKgEWNkl",
-    "order_id": "order_XXRK46319NZE",
+    "entity_id": "pay_T8F9sUG9vYaMVH",
+    "order_id": "order_OXSWZM4TC1HM",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_GZ0fMeAcowAn1O",
-    "order_id": "order_A2J0MUSTJI26",
+    "entity_id": "pay_d2pFFa5V3OtGXb",
+    "order_id": "order_JQ4Z1ZM6IS0F",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_SuVU5ZDdEPf28U",
-    "order_id": "order_KZ1XAFTCJR2D",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Partial payment 1 of 2, remainder follows.",
+    "entity_id": "pay_VX4ulJWgLv66vu",
+    "order_id": "order_OHMIRHN765JK",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_VzInPABK8YiUlG",
-    "order_id": "order_KZ1XAFTCJR2D",
-    "category": "SPLIT_PAYMENT",
-    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "entity_id": "pay_bxMx8gBge5L7T6",
+    "order_id": "order_3NVF7HBOM6KR",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_xIHt2oCHMW9n53",
-    "order_id": "order_U7O7NP1SCR38",
+    "entity_id": "pay_eCaC0Q5ENNfzO6",
+    "order_id": "order_VPJV61DE98U9",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": null,
+    "order_id": "order_3NJ1WUHZUIKE",
+    "category": "UNMATCHED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_wAIxhgUgIC3qye",
+    "order_id": "order_CQMQCWCN2NPF",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_rSEepEAQTmU3IA",
+    "order_id": "order_NOSG9MU73DA6",
     "category": "CORRUPTED_TRUNCATED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_JQUYz2jvTs0Hj0",
-    "order_id": "order_GXIC0DYX7043",
+    "entity_id": "pay_qTDFfSPrm3R2dm",
+    "order_id": "order_WX08NOK50M8Z",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_mhlXct737LE1uj",
-    "order_id": "order_3ER9V4HIFNC4",
+    "entity_id": "pay_0Ej6dShptwkN7u",
+    "order_id": "order_M7OVUKPLWU6H",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ak8GbPKbkbpqmy",
+    "order_id": "order_W0QNGV422EMI",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_hM9h2Fe4UPpitH",
+    "order_id": "order_KYOILHQYRO7J",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_U2I48hQO95l3tf",
+    "order_id": "order_L2P1FD7K2KDV",
     "category": "CORRUPTED_TRUNCATED",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_KHVfZL1eVeBVFO",
-    "order_id": "order_CV67GQGYIQCS",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_OUT4d16C7bcQQl",
-    "order_id": "order_VBC4T97DZYLC",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_GEIAEtjQvzj1CH",
-    "order_id": "order_KTBFRQF28BOG",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_zX6ydiowVByelq",
-    "order_id": "order_KC7NGUAB09M6",
-    "category": "CLEAN_EXACT",
-    "narration": null,
-    "isTrueCandidate": null
-  },
-  {
-    "entity_id": "pay_RwEhBxvGIrPwV9",
-    "order_id": "order_1DRO9XFNQQ3F",
+    "entity_id": "pay_Jx3FGLqEbiV3S5",
+    "order_id": "order_6ACOUZ200XJ1",
     "category": "SPLIT_PAYMENT",
     "narration": "Partial payment 1 of 2, remainder follows.",
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_p9Ovj7bZ7jnbFG",
-    "order_id": "order_1DRO9XFNQQ3F",
+    "entity_id": "pay_HO6XIkEHBpUyT2",
+    "order_id": "order_6ACOUZ200XJ1",
     "category": "SPLIT_PAYMENT",
     "narration": "Final partial payment 2 of 2; order now fully settled.",
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_SR2VICxN2EMmxz",
-    "order_id": "order_CF3UOZMI8LTJ",
+    "entity_id": "pay_3DGvcdq7aEOBny",
+    "order_id": "order_WUSTNNQ5IJ38",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_er41HqhrHcLGvx",
+    "order_id": "order_NTZOHV2X17SA",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_UsWsGiKXxdaAb1",
-    "order_id": "order_4HUS60VVULYI",
+    "entity_id": "pay_lFA8P0twzZONA7",
+    "order_id": "order_O8403DCTZ12M",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Duplicate settlement flagged by risk review, pending confirmation.",
+    "isTrueCandidate": false
+  },
+  {
+    "entity_id": "pay_MSAgYXVbJfKacM",
+    "order_id": "order_O8403DCTZ12M",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Original transaction cleared successfully; no resubmission required.",
+    "isTrueCandidate": true
+  },
+  {
+    "entity_id": "pay_s08zMJsSJaYaHP",
+    "order_id": "order_LKTROJMO7LX8",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_B8jGOnGZwuwevM",
-    "order_id": "order_L5RF91FB303W",
+    "entity_id": "pay_D9Qafu9QgWJZIY",
+    "order_id": "order_HFLGB7CG78J7",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_9Q77dujnwbprtb",
-    "order_id": "order_F790O9PN3FYJ",
+    "entity_id": "pay_zlZ7yVNb0hJKel",
+    "order_id": "order_L7M969FV0I4G",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_DhYDdpN2gf3VHe",
-    "order_id": "order_XOAK8FQG0Q35",
+    "entity_id": "pay_Leh7KcmMb1hF6g",
+    "order_id": "order_OXDTW3378I4Q",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_PooeJOPJKL4EXT",
-    "order_id": "order_T3UTJA1JTWQY",
+    "entity_id": "pay_CIOt8kS2zN4B7m",
+    "order_id": "order_QZTIKTH0W2T1",
     "category": "CLEAN_EXACT",
     "narration": null,
     "isTrueCandidate": null
   },
   {
-    "entity_id": "pay_SLTCIU1sgqMthK",
-    "order_id": "order_24SBI723A200",
+    "entity_id": "pay_5hmNRVbAlxfhPY",
+    "order_id": "order_P3418BUG2E4C",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ZPs2XOyQd659gQ",
+    "order_id": "order_CWTBQ54D2FRQ",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 2, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Hwp3qgrU8y0dGO",
+    "order_id": "order_CWTBQ54D2FRQ",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_qDDzWrzjavy7yS",
+    "order_id": "order_UWW5NAPAR442",
     "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_4PoRPNWOqZcMxY",
+    "order_id": "order_EK1Z5WVBKNA0",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_XPoQsSwlobHGBF",
+    "order_id": "order_QBFX2IP9F15D",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Qj6Ysgtl3kg56H",
+    "order_id": "order_3RGUELU4POXH",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_U2gTwX5fdRfGKK",
+    "order_id": "order_4BTAP4DTQ53C",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_PzPTPtYXYTyUeU",
+    "order_id": "order_DCBYMDWMOH9B",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Original transaction cleared successfully; no resubmission required.",
+    "isTrueCandidate": true
+  },
+  {
+    "entity_id": "pay_CM8t5bYThISmFe",
+    "order_id": "order_DCBYMDWMOH9B",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Manual resubmission per customer request; verify against original before crediting.",
+    "isTrueCandidate": false
+  },
+  {
+    "entity_id": "pay_oll2TSTLRR2unD",
+    "order_id": "order_KDJURLG9IQKF",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_C9oB63yA1J6wLV",
+    "order_id": "order_OCX47Q3XPNR8",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_LCpkZpyueYkVI4",
+    "order_id": "order_1LKQT388MXZ1",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_gKWzWpIbdVFpRL",
+    "order_id": "order_PBO3G84NTZ3T",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Original transaction cleared successfully; no resubmission required.",
+    "isTrueCandidate": true
+  },
+  {
+    "entity_id": "pay_0BPjek4RsSFPQL",
+    "order_id": "order_PBO3G84NTZ3T",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Duplicate settlement flagged by risk review, pending confirmation.",
+    "isTrueCandidate": false
+  },
+  {
+    "entity_id": "pay_CgOveXvvFDepB4",
+    "order_id": "order_ZXB7A6ZLSX2K",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_fMqp9owgK9neiG",
+    "order_id": "order_HXNZ2CQHYLZ0",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_cULa0OCe2bImge",
+    "order_id": "order_A445VL3XHD15",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_nsyMd2MVT6fHSl",
+    "order_id": "order_GSJPYR8WHV34",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_KXWMJVZ73YMOGd",
+    "order_id": "order_FR492UUJ419R",
+    "category": "ON_HOLD",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ygduYD25o4V1e5",
+    "order_id": "order_0Y1YFYAB4VC3",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_SB5ITq3Lp1Tdy6",
+    "order_id": "order_KU6K1VQH9QFY",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_ghfIfv9VpoME30",
+    "order_id": "order_PVDP5X3KCWCY",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Settlement matches the sole confirmed payment attempt for this order.",
+    "isTrueCandidate": true
+  },
+  {
+    "entity_id": "pay_Fmg8pFR4KJt0DY",
+    "order_id": "order_PVDP5X3KCWCY",
+    "category": "AMBIGUOUS_DUPLICATE",
+    "narration": "Retry after gateway timeout, original attempt unconfirmed.",
+    "isTrueCandidate": false
+  },
+  {
+    "entity_id": "pay_lZX1wraEpFv1dC",
+    "order_id": "order_KAQZ97EZVBR6",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_59zFzi3BfsFG2w",
+    "order_id": "order_DEL79ZGLDKFZ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Zpswqoe7YDE9NP",
+    "order_id": "order_AAEE2UVRGASU",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_m7cCLtDwsIpBKD",
+    "order_id": "order_FVMFKA27SZX7",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_p0i0mVaXZLFMgW",
+    "order_id": "order_WJCX1C1D7WPN",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_bGcJzN7VHimYud",
+    "order_id": "order_DA0ZBYUBILU7",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_DTyOyPg6M6nkoo",
+    "order_id": "order_0CH2T5MH2TGR",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_4bAjJiq0ZKoB1G",
+    "order_id": "order_RRVOXKOBUC92",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Na1jEy7kSiOQTC",
+    "order_id": "order_BR67H75XEVSR",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_AOxQnWh6otd4h6",
+    "order_id": "order_892KTI58CHDJ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_EaMmYcsWfoSX2C",
+    "order_id": "order_OWL4GAV53W19",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_20CaRUwfXDjmWl",
+    "order_id": "order_AVYWDH1HKHWZ",
+    "category": "ON_HOLD",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_LJXxXjH1x8tu7K",
+    "order_id": "order_D3C5CTC0RGXQ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Nkw04d56GDvQmo",
+    "order_id": "order_5TDHRMCMEVZ0",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_6Kh9UOTJ2bBbwM",
+    "order_id": "order_KE2PR2VVT85H",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_7LSqzIrukrZzfQ",
+    "order_id": "order_GXLGT8EWEEOU",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_4LilNtIZGTeIOt",
+    "order_id": "order_1XURUSZWZIF1",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_NqzT2mJr5AEGqW",
+    "order_id": "order_ICNHUWRJMUXR",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_0l0GpycVNfYNND",
+    "order_id": "order_ODVDX3M8I0WR",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_gqPC13mVKhuOr1",
+    "order_id": "order_4ZT0422MSCYG",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 2, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_hFjf7leqB0S0cf",
+    "order_id": "order_4ZT0422MSCYG",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_z6ATXabgYr4Qma",
+    "order_id": "order_17RFMSTC7N60",
+    "category": "CORRUPTED_TRUNCATED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_dgjZKBttS8g1Zy",
+    "order_id": "order_0A0UK9JPSVBQ",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_FbpIJonFaGF5Ei",
+    "order_id": "order_QFHEZ8WIJSI2",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_qxNg4IEGNEDBQh",
+    "order_id": "order_PL1ZN0WJQ0I5",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_XQ4hEKFXeEwny8",
+    "order_id": "order_XVQ3LQ7TE51E",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": null,
+    "order_id": "order_S1HNYY6HAZL4",
+    "category": "UNMATCHED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_BiCpupJuzdNHIN",
+    "order_id": "order_04ZCOYNDDT8T",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_0TiR4IgokehhkK",
+    "order_id": "order_ZN8PA2WHC17C",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_AOQhNYLAffCiOl",
+    "order_id": "order_1DOL5DF4L930",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_nLuyVuOWLOS9Xy",
+    "order_id": "order_RFZMEL7TKZL8",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 2, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_Gm48IERrdzrNQw",
+    "order_id": "order_RFZMEL7TKZL8",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_vzeV7gUy7b6x57",
+    "order_id": "order_XCA076Y33KGQ",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_6DCELylzLHyI3g",
+    "order_id": "order_ATOS8NPS9SZY",
+    "category": "CORRUPTED_SUBSTITUTED",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_R48JW3gpufgMqQ",
+    "order_id": "order_PK9KB853YIIG",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_x9q3BntsfJjvNO",
+    "order_id": "order_KFJCIUX6V691",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Partial payment 1 of 2, remainder follows.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_B8Qwx2BmA21Xp1",
+    "order_id": "order_KFJCIUX6V691",
+    "category": "SPLIT_PAYMENT",
+    "narration": "Final partial payment 2 of 2; order now fully settled.",
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_5i1B4VsKR5UFrh",
+    "order_id": "order_91YOGF6PFAGV",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_8jVqHWV6l9Np6R",
+    "order_id": "order_0XN4WZV04YE0",
+    "category": "CLEAN_EXACT",
+    "narration": null,
+    "isTrueCandidate": null
+  },
+  {
+    "entity_id": "pay_DW1QzWAzeuq92c",
+    "order_id": "order_U8UGUIC7KYQ8",
+    "category": "CORRUPTED_SUBSTITUTED",
     "narration": null,
     "isTrueCandidate": null
   }

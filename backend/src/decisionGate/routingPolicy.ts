@@ -177,6 +177,22 @@ export async function routeDeterministicCase(routedCase: RoutedCase, context: Ro
       throw new Error(`routeDeterministicCase: unexpected route "${routedCase.route}" for caseType residual_match.`);
     }
 
+    case 'amount_mismatch': {
+      // No FS score exists for this caseType (see thresholdGate.ts's Rule
+      // 2.5) - there's no gradient to normalize a pseudo-confidence against,
+      // so this is treated as maximally uncertain (priorityScore ==
+      // exposureAmount), the same fallback computeLinearPseudoConfidence
+      // itself uses for its own degenerate case.
+      const settlement = routedCase.settlements[0];
+      await enqueueForReview({
+        matchCandidateId: matchCandidateIdFor(settlement.id, context),
+        reasonCode: routedCase.reasonCode,
+        exposureAmount: settlement.amount,
+        priorityScore: settlement.amount,
+      });
+      return 'reviewed';
+    }
+
     default:
       throw new Error(
         `routeDeterministicCase: caseType "${routedCase.caseType}" requires AI investigation - use routeAfterAIInvestigation.`,

@@ -228,6 +228,33 @@ describe('routeAllCases', () => {
     expect(byId.get(11)!.route).toBe('ai_investigation');
   });
 
+  it('rule 2.5: routes a lone amount-mismatch (no sibling on the same order) to human_review, not silently dropped', () => {
+    const o = makeOrder(50);
+    const s = makeSettlement(50, o.orderId);
+
+    const result = routeAllCases([], [], [], [], thresholds, [{ settlement: s, order: o }]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0]).toMatchObject({
+      caseType: 'amount_mismatch',
+      order: o,
+      fsScore: null,
+      route: 'human_review',
+      reasonCode: 'settlement_amount_does_not_reconcile_no_split_solution',
+    });
+    expect(result[0].settlements).toEqual([s]);
+  });
+
+  it('rule 2.5: defaults to no lone amount-mismatches when the argument is omitted (backward compatible)', () => {
+    const s = makeSettlement(1);
+    const o = makeOrder(1);
+
+    const result = routeAllCases([{ settlement: s, order: o }], [], [], [], thresholds);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].caseType).toBe('exact_match');
+  });
+
   it('combines all rule types into one routed-case list', () => {
     const exactOrder = makeOrder(100);
     const exactSettlement = makeSettlement(100, exactOrder.orderId);

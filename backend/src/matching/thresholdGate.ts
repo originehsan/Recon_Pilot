@@ -18,7 +18,8 @@ export interface RoutedCase {
     | 'ambiguous_duplicate'
     | 'split_payment_ambiguous'
     | 'residual_match'
-    | 'residual_no_match';
+    | 'residual_no_match'
+    | 'amount_mismatch';
   settlements: Settlement[];
   order: LedgerOrder | null;
   fsScore: number | null;
@@ -42,6 +43,18 @@ export function routeAllCases(
   splitPaymentResults: SplitPaymentResult[],
   hungarianResults: AssignmentResult[],
   thresholds: Thresholds,
+  // Settlements whose order_id matched an order but whose amount reconciled
+  // against neither a plain exact match NOR any split-payment subset, AND
+  // had no sibling mismatch on the same order to even attempt a split
+  // against (splitPaymentDetector.ts's detectSplitPayments explicitly skips
+  // these - see its own comment: "the caller is responsible for handling
+  // lone amount-mismatches separately"). Before this rule existed, a
+  // settlement in this bucket had no rule anywhere in this function that
+  // ever picked it up - it never became a RoutedCase at all, so it never
+  // reached the decision gate, review_queue, or an audit event: a real
+  // settlement, silently unaccounted for. Optional/defaulted to preserve
+  // every existing call site (including this file's own tests).
+  loneAmountMismatches: { settlement: Settlement; order: LedgerOrder }[] = [],
 ): RoutedCase[] {
   const routedCases: RoutedCase[] = [];
 
@@ -76,6 +89,25 @@ export function routeAllCases(
       fsScore: null,
       route: 'ai_investigation',
       reasonCode: 'multiple_settlements_same_order_same_amount_no_discriminating_signal',
+    });
+  }
+
+  // Rule 2.5: lone amount-mismatches - order_id matched, but the amount
+  // didn't reconcile as an exact match and had no sibling settlement on the
+  // same order to even attempt a split-payment subset against. Not a
+  // guessable auto_resolve (the whole point of this system is never to guess
+  // on money) and not worth spending a Gemini call on either - there's no
+  // narration-vs-candidate ambiguity for the AI to adjudicate, just a number
+  // that doesn't add up. Routed straight to human_review, same as Rule 5's
+  // review-band residual_match cases.
+  for (const { settlement, order } of loneAmountMismatches) {
+    routedCases.push({
+      caseType: 'amount_mismatch',
+      settlements: [settlement],
+      order,
+      fsScore: null,
+      route: 'human_review',
+      reasonCode: 'settlement_amount_does_not_reconcile_no_split_solution',
     });
   }
 

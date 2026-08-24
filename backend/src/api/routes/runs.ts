@@ -77,7 +77,15 @@ async function processRunAsync(runId: number): Promise<void> {
   try {
     await pool.query(`UPDATE batch_runs SET status = 'processing', started_at = NOW() WHERE id = ?`, [runId]);
 
-    const { settlements, orders } = await loadSettlementsAndOrders();
+    // excludeResolved: true - a live run must not re-scan settlements a
+    // PRIOR run already finalized. Without this, every run's "Total Cases"
+    // count included every previously-resolved settlement all over again
+    // (misleading, and growing without bound run over run), and every one
+    // of those re-scans re-triggered finalizeCase's no-op branch - which
+    // used to write a redundant audit_events row every time (see
+    // decisionGate.ts's matching fix - confirmed live, resolution id 1 had
+    // 13 audit rows from 12 unnecessary re-runs before both fixes).
+    const { settlements, orders } = await loadSettlementsAndOrders({ excludeResolved: true });
     const groundTruth = loadGroundTruth();
     const { routedCases, thresholds } = runFullPipeline(settlements, orders, groundTruth);
 

@@ -146,5 +146,19 @@ describe('GET /api/runs/:id/exceptions', () => {
     expect(res.status).toBe(200);
     expect(res.body).toHaveLength(1);
     expect(res.body[0]).toMatchObject({ reviewId: 1, settlementEntityId: 'pay_xyz', status: 'pending' });
+
+    // Regression guard: mysql2 returns DECIMAL columns as strings (the
+    // fixture above deliberately mimics that real behavior) - the route
+    // must convert them to real numbers before they reach the frontend,
+    // which calls number-only methods (.toFixed, etc.) directly on these
+    // fields. A previous version of this route passed the raw string
+    // through unconverted, which crashed the Dashboard/Exceptions pages
+    // the first time a real run actually populated review_queue.
+    expect(typeof res.body[0].exposureAmount).toBe('number');
+    expect(res.body[0].exposureAmount).toBe(1000);
+    expect(typeof res.body[0].priorityScore).toBe('number');
+    expect(res.body[0].priorityScore).toBe(500);
+    expect(typeof res.body[0].settlementAmount).toBe('number');
+    expect(res.body[0].settlementAmount).toBe(1000);
   });
 });
