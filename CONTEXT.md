@@ -72,16 +72,3 @@ whole viewport.
 ### Status pills
 Semantic pills with SUBTLE background fills (not solid-color-fill buttons) — e.g. a "matched" pill
 is a soft-tinted background with the semantic color as text/border, not a solid-filled badge.
-
-## Known current issues to fix (from reviewing screenshots)
-1. Teal is currently overused for brand/action purposes (nav active state, primary buttons, icons)
-   AND as the "Deterministic" semantic color — this conflates two different meanings. Brand/action
-   color must switch to Dodger Blue (#0d94fb); teal is reserved exclusively for the Deterministic
-   badge/chart semantic.
-2. Cards are flat (border-only, no shadow) — need the 3-tier elevation system.
-3. Border-radius is too large/soft everywhere — needs to tighten to the 4-6px Blade Edge system.
-4. JSON upload textarea has no syntax highlighting or visual distinction — needs monospace font at
-   minimum, ideally a code-block treatment.
-5. Empty states take up too much vertical space with too much padding — need to be more compact
-   and data-dense, consistent with a professional tool rather than a marketing-page aesthetic.
-6. IDs/amounts throughout use the body font — should switch to monospace per the typography rules above.

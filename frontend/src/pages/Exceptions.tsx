@@ -33,6 +33,7 @@ import { formatPaise, formatDecimal } from '../utils/format';
 function humanizeReasonCode(code: string): string {
   const MAP: Record<string, string> = {
     fs_score_in_review_band: 'Score in review band',
+    settlement_amount_does_not_reconcile_no_split_solution: 'Amount does not reconcile',
     ambiguous_duplicate: 'Ambiguous duplicate',
     split_payment_ambiguous: 'Split payment (ambiguous)',
     no_match_found: 'No match found',
@@ -292,7 +293,7 @@ function ExceptionRow({ exception: ex, isExpanded, isFlashing, rowIndex, onToggl
             className="mono text-sm font-medium"
             style={{ color: 'var(--color-text-secondary)' }}
           >
-            {ex.priorityScore.toFixed(4)}
+            {formatDecimal(ex.priorityScore, 4)}
           </span>
         </td>
 
