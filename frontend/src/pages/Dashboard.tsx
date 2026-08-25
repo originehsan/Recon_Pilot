@@ -419,60 +419,84 @@ export function Dashboard() {
       </div>
 
       {/* ── Decision Architecture ─────────────────────────────────────────── */}
-      <div className="card p-5 flex flex-col gap-0">
-        <p className="section-label mb-3">Decision Architecture</p>
+      <div className="card p-5 flex flex-col justify-between gap-6">
+        <p className="section-label">Decision Architecture</p>
 
-        {/* Row 1 — Deterministic */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '140px 1fr',
-            columnGap: '1.5rem',
-            alignItems: 'center',
-            borderBottom: '1px solid var(--color-border)',
-            paddingTop: '0.75rem',
-            paddingBottom: '0.75rem',
-          }}
-        >
-          <DecisionSourceBadge value="stage1_exact" size="sm" />
-          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
-            Matched automatically when the amount, reference, and identity all agree exactly. No AI involved.
-          </span>
-        </div>
+        <div className="relative flex items-start justify-between">
+          {/* Connecting Line (background) */}
+          <div 
+            className="absolute top-[5px] h-[1px]" 
+            style={{ left: '2rem', right: '2rem', background: 'var(--color-border)' }} 
+          />
 
-        {/* Row 2 — AI-Assisted */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '140px 1fr',
-            columnGap: '1.5rem',
-            alignItems: 'center',
-            borderBottom: '1px solid var(--color-border)',
-            paddingTop: '0.75rem',
-            paddingBottom: '0.75rem',
-          }}
-        >
-          <DecisionSourceBadge value="AI" size="sm" />
-          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
-            AI investigates cases the rules can't resolve, and the decision gate confirms every result before it closes.
-          </span>
-        </div>
+          {/* Node 1: MATCH */}
+          <div className="flex flex-col items-center gap-2 relative z-10 w-16">
+            <div 
+              className="w-3 h-3 rounded-full border-2" 
+              style={{ background: 'var(--color-bg-surface)', borderColor: 'var(--color-teal)' }} 
+            />
+            <div className="flex flex-col items-center">
+              <span className="mono text-[10px] font-bold tracking-wider" style={{ color: 'var(--color-text-primary)' }}>MATCH</span>
+              {progress && progress.totalCases !== undefined && (
+                <span className="text-[10px] font-semibold mt-0.5" style={{ color: 'var(--color-text-secondary)' }}>
+                  {progress.totalCases.toLocaleString()}
+                </span>
+              )}
+            </div>
+          </div>
 
-        {/* Row 3 — Human */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '140px 1fr',
-            columnGap: '1.5rem',
-            alignItems: 'center',
-            paddingTop: '0.75rem',
-            paddingBottom: '0.75rem',
-          }}
-        >
-          <DecisionSourceBadge value="human" size="sm" />
-          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
-            A reviewer makes the final call when neither automated matching nor AI reaches sufficient confidence.
-          </span>
+          {/* Node 2: SCORE */}
+          <div className="flex flex-col items-center gap-2 relative z-10 w-16">
+            <div 
+              className="w-3 h-3 rounded-full border-2" 
+              style={{ background: 'var(--color-bg-surface)', borderColor: 'var(--color-teal)' }} 
+            />
+            <div className="flex flex-col items-center">
+              <span className="mono text-[10px] font-bold tracking-wider" style={{ color: 'var(--color-text-primary)' }}>SCORE</span>
+              {/* Structural-only count */}
+            </div>
+          </div>
+
+          {/* Node 3: ASSIGN */}
+          <div className="flex flex-col items-center gap-2 relative z-10 w-16">
+            <div 
+              className="w-3 h-3 rounded-full border-2" 
+              style={{ background: 'var(--color-bg-surface)', borderColor: 'var(--color-teal)' }} 
+            />
+            <div className="flex flex-col items-center">
+              <span className="mono text-[10px] font-bold tracking-wider" style={{ color: 'var(--color-text-primary)' }}>ASSIGN</span>
+              {/* Structural-only count */}
+            </div>
+          </div>
+
+          {/* Node 4: INVESTIGATE */}
+          <div className="flex flex-col items-center gap-2 relative z-10 w-16">
+            <div 
+              className="w-3 h-3 rounded-full border-2" 
+              style={{ background: 'var(--color-bg-surface)', borderColor: 'var(--color-purple)' }} 
+            />
+            <div className="flex flex-col items-center">
+              <span className="mono text-[10px] font-bold tracking-wider" style={{ color: 'var(--color-text-primary)' }}>INVESTIGATE</span>
+              {/* Structural-only count */}
+            </div>
+          </div>
+
+          {/* Node 5: GATE */}
+          <div className="flex flex-col items-center gap-2 relative z-10 w-16">
+            {/* Bold/thick-border treatment for Decision Gate */}
+            <div 
+              className="w-3 h-3 rounded-full border-2" 
+              style={{ background: 'var(--color-teal)', borderColor: 'var(--color-teal)' }} 
+            />
+            <div className="flex flex-col items-center">
+              <span className="mono text-[10px] font-bold tracking-wider" style={{ color: 'var(--color-text-primary)' }}>GATE</span>
+              {progress && progress.resolved !== undefined && (
+                <span className="text-[10px] font-semibold mt-0.5" style={{ color: 'var(--color-text-secondary)' }}>
+                  {progress.resolved.toLocaleString()}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Guarantee */}
@@ -482,7 +506,6 @@ export function Dashboard() {
             color: 'var(--color-text-primary)',
             borderTop: '1px solid var(--color-border)',
             paddingTop: '0.625rem',
-            marginTop: '0.25rem',
             fontWeight: 600,
           }}
         >

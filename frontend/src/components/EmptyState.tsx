@@ -23,12 +23,12 @@ export function EmptyState({
   action,
 }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center py-6 gap-3 text-center">
+    <div className="flex flex-col items-center justify-center py-4 gap-2.5 text-center">
       <div
-        className="w-10 h-10 rounded-full flex items-center justify-center"
+        className="w-7 h-7 rounded-full flex items-center justify-center"
         style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-text-muted)' }}
       >
-        <Icon size={20} strokeWidth={1.5} />
+        <Icon size={14} strokeWidth={1.5} />
       </div>
 
       <div className="flex flex-col gap-1">

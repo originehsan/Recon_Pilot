@@ -370,6 +370,17 @@ export function AuditLookup() {
       {/* Loading */}
       {loading && <LoadingSpinner message="Looking up decision trail…" />}
 
+      {/* Pre-search Empty State */}
+      {events === null && !loading && !error && (
+        <div className="mt-8">
+          <EmptyState
+            icon={Search}
+            title="Ready to search"
+            message="Search by settlement, order, match candidate, or resolution ID to see its full decision trail — evidence, AI output, and the final gate decision, always kept separate."
+          />
+        </div>
+      )}
+
       {/* Results */}
       {events !== null && !loading && (
         <>
@@ -377,7 +388,7 @@ export function AuditLookup() {
             <EmptyState
               icon={Search}
               title="No audit trail found"
-              message={`No decisions recorded for ${lastQuery?.entityType} #${lastQuery?.entityId}.`}
+              message={`No audit trail found for ${lastQuery?.entityType} #${lastQuery?.entityId} — double-check the ID, or confirm this entity has actually been processed by a reconciliation run.`}
             />
           ) : (
             <div className="flex flex-col gap-4">

@@ -392,7 +392,7 @@ export function Exceptions() {
       <EmptyState
         icon={AlertTriangle}
         title="No active run"
-        message="Navigate to the Dashboard to start a reconciliation run first."
+        message="Exceptions only appear here after a reconciliation run finds cases it can't resolve on its own."
         action={{ label: 'Go to Dashboard', onClick: () => navigate('/') }}
       />
     );
