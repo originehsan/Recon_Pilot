@@ -1,120 +1,66 @@
-# ReconPilot — Settlement Reconciliation System
+# ReconPilot
 
-## Project Thesis
+ReconPilot checks whether an incoming payment settlement actually matches the order it's supposed to pay for, and whether the amount is right. Most settlements match cleanly and get resolved instantly — no human or AI needed. Only the genuinely unclear cases go to an AI model for a second look, and even then the AI never has the final word: a separate piece of code always makes and records the real decision.
 
-ReconPilot is a settlement reconciliation system built for the Razorpay AI Buildathon 2026 (Track: AI Finance Controller). The core thesis is that a deterministic matching engine (SHA-256 hash matching, Fellegi-Sunter probabilistic scoring, Hungarian algorithm assignment) resolves what it can with certainty, and an LLM (Gemini) is invoked only for genuinely ambiguous cases where deterministic evidence is insufficient. A single "decision gate" module is the sole place any case gets finalized — no module, including the AI layer, can write a final decision directly. Every finalized decision is tagged with a `decidedBy` value: `stage1_exact` or `stage7_auto` (deterministic, no AI), `post_ai` (AI investigated, gate confirmed), or `human` (manual reviewer decision).
+## Why this exists
 
----
+Settlement mismatches happen at any scale — a slightly different transaction reference, a payment split across two transfers, a retry after a timeout. Someone always has to work out which records are genuine matches and which need a closer look before money gets marked as reconciled. Getting this wrong either means real money is misallocated, or a finance team wastes hours manually checking things a computer could resolve in milliseconds.
 
-## Repository Structure
+ReconPilot automates the part that's safe to automate, and stays careful about the part that isn't.
 
-```
-recon-pilot/
-├── backend/     # Express + TypeScript API, MySQL, Gemini AI
-└── frontend/    # React + Vite + Tailwind v4 dashboard
-```
+## How it works
 
----
+![ReconPilot pipeline flow](assets/images/reconpilot-pipeline-flow-detailed.svg)
 
-## Backend Setup
+When a settlement comes in, ReconPilot checks it against the order it should belong to:
 
-### Prerequisites
-- Node.js ≥ 18
-- MySQL 8.0 running locally
-- A Google Gemini API key (free tier works; see quota note below)
+- **Amount and reference match exactly?** It's matched instantly — no AI, no human, just code.
+- **Payment was split into 2-3 parts that add up correctly?** Matched automatically too.
+- **Two records look equally plausible, or the numbers don't clearly point to one answer?** An AI model reads the extra details (like transaction notes) and suggests which one is correct.
+- **Still not confident, even after AI?** A human makes the final call.
 
-### Steps
+No matter which path a case takes, only one part of the code is ever allowed to record the actual decision. The AI can suggest an answer — it can never write it down itself.
 
-```bash
-cd backend
+## Demo video
 
-# 1. Install dependencies
-npm install
+<!-- TODO: replace with the actual video link before submission -->
+[▶ Watch the 5-minute demo](PASTE_VIDEO_LINK_HERE)
 
-# 2. Configure environment
-cp .env.example .env
-# Edit .env with your MySQL credentials and GEMINI_API_KEY
+## Getting started
 
-# 3. Run database migrations
-npm run migrate
+**Prerequisites:** Node.js 18+, MySQL 8 running locally, a Google Gemini API key (the free tier works).
 
-# 4. (Optional) Seed with synthetic test data
-#    WARNING: this inserts a large dataset — see quota warning below
-npm run seed
+### Backend
 
-# 5. Start the development server
-npm run dev
-# Server runs at http://localhost:3000
-# Health check: GET http://localhost:3000/health
-```
+1. Clone the repo
+2. `cd backend && npm install`
+3. `cp .env.example .env` — then fill in your MySQL credentials and `GEMINI_API_KEY`
+4. `npm run migrate`
+5. `npm run seed` (optional — loads a synthetic test dataset)
+6. `npm run dev` — runs at http://localhost:3000
 
----
+### Frontend
 
-## Frontend Setup
+1. `cd frontend && npm install`
+2. `npm run dev` — runs at http://localhost:5173 and talks to the backend automatically
 
-### Prerequisites
-- Node.js ≥ 18
-- Backend running at `http://localhost:3000`
+Open http://localhost:5173 once both are running.
 
-### Steps
+## A note on API quota
 
-```bash
-cd frontend
+ReconPilot's AI step uses Google Gemini's free tier, which allows about 5 requests per minute and roughly 20 per day. A full reconciliation run against a large dataset can use up most of that in one go, so for everyday testing, upload a small batch (5-10 records) instead of running against the full seeded dataset.
 
-# 1. Install dependencies
-npm install
+## Running tests
 
-# 2. Start the development server
-npm run dev
-# Frontend runs at http://localhost:5173
-# API calls are proxied to http://localhost:3000 automatically (vite.config.ts)
-```
+`cd backend && npm test` runs the unit test suite — matching logic, the decision gate, API routes, and the audit trail. Additional live-verification scripts exist in `backend/src/*/manualVerify.ts` for deeper checks against real data.
 
-### Running Both Together (two terminals)
+## Known limitations
 
-```bash
-# Terminal 1 — backend
-cd backend && npm run dev
-
-# Terminal 2 — frontend
-cd frontend && npm run dev
-```
-
-Then open **http://localhost:5173** in your browser.
+- A reconciliation run reprocesses every currently-unresolved record in the database, not just the batch you just uploaded.
+- The review queue isn't scoped to a single run — it always shows every pending item across the whole system.
+- Split-payment detection only looks for 2-way and 3-way splits, not longer chains.
+- The matching thresholds are calibrated against a labeled synthetic dataset built for this demo, not real production data.
 
 ---
 
-## Quick Demo Walk-Through
-
-1. **Upload a small batch** — click "Upload Batch" on the Dashboard, paste a JSON payload (a small sample is pre-filled), click "Upload Batch". This seeds settlements and orders into the database.
-
-2. **Start a run** — click "Start New Run". The pipeline runs asynchronously; the UI polls every 2 seconds and updates the progress cards live.
-
-3. **Review the chart** — once the run completes, the pie chart shows resolved/in-review/failed case counts.
-
-4. **Check exceptions** — click "View All" or navigate to "Exceptions". For any pending item, click "Resolve" to expand the inline form and approve/reject/mark-unresolved.
-
-5. **Audit trail** — navigate to "Audit Lookup". Enter `entityType=resolution` and the resolution's numeric ID to see the full event trail, with Evidence Used, AI Raw Output, and Decision Gate Output displayed as three distinct, separately-colored boxes.
-
----
-
-## Gemini API Quota Warning
-
-> ⚠️ **Important for repeated UI testing.**
->
-> The Gemini free tier allows approximately 15–20 requests per day (as of mid-2026). A single reconciliation run against the **full seeded dataset** may contain multiple `ai_investigation` cases and can consume most of this daily quota in one run.
->
-> **Recommendation:** Use the "Upload Batch" panel on the Dashboard to upload a small manually-crafted batch of 5–10 records for repeated UI testing. Only trigger a run against the full seeded dataset when you need to exercise the AI path end-to-end for a final demo — and expect the run to take several minutes due to the 13-second inter-call pacing built into the backend.
-
----
-
-## API Reference (quick summary)
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/api/batches` | Upload settlements + orders |
-| `POST` | `/api/runs` | Start a reconciliation run |
-| `GET`  | `/api/runs/:id` | Poll run status + progress |
-| `GET`  | `/api/runs/:id/exceptions` | List pending human-review items |
-| `POST` | `/api/exceptions/:id/resolve` | Finalize a human review decision |
-| `GET`  | `/api/audit?entityType=&entityId=` | Audit event trail for any entity |
+This is a submission for the Razorpay AI Buildathon 2026, Track 4 (AI Finance Controller).

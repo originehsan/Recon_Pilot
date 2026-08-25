@@ -1,0 +1,111 @@
+<svg width="800" height="1520" viewBox="0 0 800 1520" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>ReconPilot full pipeline, stage by stage</title>
+<desc>Ten real, tested stages: normalize, exact match, residual candidates, split-payment detection, string similarity, probabilistic scoring, ambiguity components, optimal assignment, then routing to auto-resolve, human review, or AI investigation, converging on a single decision gate, then an immutable audit trail.</desc>
+<defs>
+<marker id="arrowD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#8B96A5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+<rect x="0" y="0" width="800" height="1520" rx="20" fill="#070e1c" stroke="#1c2536" stroke-width="1"/>
+<text x="400" y="36" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="20" font-weight="700" fill="#E8ECF1">ReconPilot — Full Pipeline, Stage by Stage</text>
+<text x="400" y="58" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12.5" fill="#97a0af">Every stage below is real and tested — nothing here is illustrative</text>
+
+<!-- Input -->
+<rect x="100" y="110" width="600" height="66" rx="8" fill="#0f172a" stroke="#1c2536" stroke-width="1"/>
+<text x="400" y="136" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#E8ECF1" font-family="ui-sans-serif,system-ui,sans-serif">Settlements + orders ingested</text>
+<text x="400" y="158" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Real Razorpay Settlement Recon field names</text>
+<line x1="400" y1="176" x2="400" y2="202" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 0 -->
+<rect x="100" y="202" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="228" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 0 — Normalize</text>
+<text x="400" y="250" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Strip pay_/order_/setl_ prefixes from IDs</text>
+<line x1="400" y1="268" x2="400" y2="294" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 1 -->
+<rect x="100" y="294" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="320" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 1 — Exact match</text>
+<text x="400" y="342" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Hash-map on settlement UTR and ID — clean matches resolve here</text>
+<line x1="400" y1="360" x2="400" y2="386" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 2 -->
+<rect x="100" y="386" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="412" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 2 — Residual candidates</text>
+<text x="400" y="434" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">All-pairs comparison, only on the small unmatched set</text>
+<line x1="400" y1="452" x2="400" y2="478" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 3 -->
+<rect x="100" y="478" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="504" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 3 — Split-payment detection</text>
+<text x="400" y="526" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Exact subset-sum, bounded to 2–3 legs by design</text>
+<line x1="400" y1="544" x2="400" y2="570" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 4 -->
+<rect x="100" y="570" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="596" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 4 — String similarity</text>
+<text x="400" y="618" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Levenshtein distance on prefix-stripped ID suffixes</text>
+<line x1="400" y1="636" x2="400" y2="662" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 5 -->
+<rect x="100" y="662" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="688" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 5 — Probabilistic scoring</text>
+<text x="400" y="710" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Fellegi–Sunter, m/u estimated from labeled ground truth</text>
+<line x1="400" y1="728" x2="400" y2="754" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 6 -->
+<rect x="100" y="754" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="780" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 6 — Ambiguity components</text>
+<text x="400" y="802" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Union–Find groups tied, competing candidates</text>
+<line x1="400" y1="820" x2="400" y2="846" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Stage 7 -->
+<rect x="100" y="846" width="600" height="66" rx="8" fill="rgba(20,184,166,0.09)" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+<text x="400" y="872" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 7 — Optimal assignment</text>
+<text x="400" y="894" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Hungarian algorithm — a dummy node allows "no match"</text>
+<line x1="400" y1="912" x2="400" y2="940" stroke="#8B96A5" stroke-width="1.5"/>
+
+<line x1="400" y1="940" x2="145" y2="962" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+<line x1="400" y1="940" x2="400" y2="962" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+<line x1="400" y1="940" x2="655" y2="962" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Auto-resolve -->
+<rect x="30" y="962" width="230" height="110" rx="10" fill="rgba(20,184,166,0.10)" stroke="rgba(20,184,166,0.6)" stroke-width="1.5"/>
+<text x="145" y="994" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Auto-resolve</text>
+<text x="145" y="1024" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">High-confidence match</text>
+<text x="145" y="1046" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">stage1_exact / stage7_auto</text>
+
+<!-- Human review -->
+<rect x="285" y="962" width="230" height="110" rx="10" fill="rgba(245,158,11,0.10)" stroke="rgba(245,158,11,0.6)" stroke-width="1.5"/>
+<text x="400" y="994" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#F59E0B" font-family="ui-sans-serif,system-ui,sans-serif">Human review</text>
+<text x="400" y="1024" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Mid-confidence match</text>
+<text x="400" y="1046" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Held for manual decision</text>
+
+<!-- AI investigation -->
+<rect x="540" y="962" width="230" height="110" rx="10" fill="rgba(167,139,250,0.10)" stroke="rgba(167,139,250,0.6)" stroke-width="1.5"/>
+<text x="655" y="994" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#A78BFA" font-family="ui-sans-serif,system-ui,sans-serif">AI investigation</text>
+<text x="655" y="1024" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Stage 8 · ambiguous only</text>
+<text x="655" y="1046" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Gemini + evidence bundle</text>
+
+<line x1="655" y1="1072" x2="655" y2="1092" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+<rect x="515" y="1092" width="280" height="44" rx="8" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="655" y="1114" text-anchor="middle" dominant-baseline="central" font-size="11.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Zod-validated evidence, not a decision</text>
+
+<line x1="145" y1="1072" x2="300" y2="1176" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+<line x1="400" y1="1072" x2="400" y2="1176" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+<line x1="655" y1="1136" x2="500" y2="1176" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Decision Gate -->
+<rect x="170" y="1176" width="460" height="110" rx="12" fill="rgba(20,184,166,0.16)" stroke="#14B8A6" stroke-width="2.5"/>
+<text x="400" y="1208" text-anchor="middle" dominant-baseline="central" font-size="18" font-weight="700" fill="#14B8A6" font-family="ui-sans-serif,system-ui,sans-serif">Stage 9 — Decision gate</text>
+<text x="400" y="1236" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">The only module that writes a final decision</text>
+<text x="400" y="1258" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">matched · rejected · unresolved</text>
+
+<line x1="400" y1="1286" x2="400" y2="1326" stroke="#8B96A5" stroke-width="1.5" marker-end="url(#arrowD)"/>
+
+<!-- Audit -->
+<rect x="170" y="1326" width="460" height="90" rx="10" fill="#0f172a" stroke="#1c2536" stroke-width="1"/>
+<text x="400" y="1356" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="600" fill="#E8ECF1" font-family="ui-sans-serif,system-ui,sans-serif">Stage 10 — Audit trail</text>
+<text x="400" y="1382" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#97a0af" font-family="ui-sans-serif,system-ui,sans-serif">Evidence, AI output, and gate output — never merged</text>
+
+<text x="400" y="1470" text-anchor="middle" font-size="15" font-weight="600" fill="#E8ECF1" font-family="ui-sans-serif,system-ui,sans-serif">AI can investigate. It can never finalize a case on its own.</text>
+</svg>
