@@ -5,6 +5,7 @@ import { upsertMatchCandidate, linkCompositeGroup } from './matchCandidateReposi
 import { persistAIInvestigationResult } from './persistAIInvestigation';
 import { routeAfterAIInvestigation, routeDeterministicCase } from './routingPolicy';
 import { insertAuditEvent } from '../audit/auditRepository';
+import { getPool } from '../db/pool';
 import { RoutedCase } from '../matching/thresholdGate';
 import { LedgerOrder, Settlement } from '../matching/types';
 import { AIInvestigationResult } from '../aiInvestigation/investigate';
@@ -28,6 +29,12 @@ vi.mock('./routingPolicy', async () => {
   };
 });
 vi.mock('../audit/auditRepository', () => ({ insertAuditEvent: vi.fn(async () => {}) }));
+vi.mock('../db/pool', () => ({ getPool: vi.fn() }));
+
+// The mock query fn behind getPool() - reused across tests, reset every time
+// so its default (no pending review_queue row found) applies unless a test
+// overrides it.
+const mockQuery = vi.fn();
 
 beforeEach(() => {
   // Defaults to "never resolved yet" so every existing test's ai_investigation
@@ -40,6 +47,12 @@ beforeEach(() => {
   vi.mocked(routeDeterministicCase).mockClear().mockImplementation(async () => 'finalized');
   vi.mocked(routeAfterAIInvestigation).mockClear().mockImplementation(async () => 'reviewed');
   vi.mocked(insertAuditEvent).mockClear();
+  // Defaults to "no pending review_queue row" (empty result set) so every
+  // existing ai_investigation test keeps calling investigateFn exactly as
+  // before this second safety check was added - only the new tests below
+  // override this to simulate an existing pending row.
+  mockQuery.mockClear().mockResolvedValue([[], []]);
+  vi.mocked(getPool).mockReturnValue({ query: mockQuery } as never);
   // fakeInvestigateFn is a single module-level mock reused by every test in
   // this file (declared below) - cleared here so each test's call-count
   // assertions start from zero, not accumulated across the whole suite.
@@ -351,6 +364,56 @@ describe('orchestrateBatch', () => {
       expect(summary).toEqual({ finalized: 1, reviewQueued: 0, failed: 0 });
       expect(routeDeterministicCase).toHaveBeenCalledTimes(1);
       expect(getCurrentResolutionId).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('skipping already-pending-review ai_investigation cases (quota + duplicate-row safety)', () => {
+    it('does not call investigateFn, persist a new ai_investigations row, or enqueue a new review_queue row when the case already has a PENDING review_queue row', async () => {
+      // Simulates review_queue already containing a pending row for this
+      // case's match_candidate_id (upsertMatchCandidate is mocked to always
+      // return 1 - see the module-level mock above).
+      mockQuery.mockResolvedValue([[{ 1: 1 }], []]);
+
+      const routedCase: RoutedCase = {
+        caseType: 'ambiguous_duplicate',
+        settlements: [makeSettlement({ id: 1 }), makeSettlement({ id: 2 })],
+        order: makeOrder({ id: 1 }),
+        fsScore: null,
+        route: 'ai_investigation',
+        reasonCode: 'multiple_settlements_same_order_same_amount_no_discriminating_signal',
+      };
+
+      const summary = await orchestrateBatch([routedCase], fakeInvestigateFn, thresholds);
+
+      expect(summary).toEqual({ finalized: 0, reviewQueued: 1, failed: 0 });
+      expect(fakeInvestigateFn).not.toHaveBeenCalled();
+      expect(persistAIInvestigationResult).not.toHaveBeenCalled();
+      expect(routeAfterAIInvestigation).not.toHaveBeenCalled();
+      // The pending-review check itself did run, against review_queue.
+      expect(mockQuery).toHaveBeenCalledWith(expect.stringContaining('review_queue'), expect.anything());
+      // Still keeps match_candidates current even when re-investigation is skipped.
+      expect(upsertMatchCandidate).toHaveBeenCalledTimes(2);
+    });
+
+    it('still investigates a genuinely new/different unresolved ai_investigation case normally (no over-blocking)', async () => {
+      // mockQuery already defaults to "no pending row found" via beforeEach -
+      // this test asserts that default explicitly, alongside a case that
+      // shares no state with any "already pending" scenario.
+      const routedCase: RoutedCase = {
+        caseType: 'ambiguous_duplicate',
+        settlements: [makeSettlement({ id: 3 }), makeSettlement({ id: 4 })],
+        order: makeOrder({ id: 2 }),
+        fsScore: null,
+        route: 'ai_investigation',
+        reasonCode: 'multiple_settlements_same_order_same_amount_no_discriminating_signal',
+      };
+
+      const summary = await orchestrateBatch([routedCase], fakeInvestigateFn, thresholds);
+
+      expect(summary).toEqual({ finalized: 0, reviewQueued: 1, failed: 0 });
+      expect(fakeInvestigateFn).toHaveBeenCalledTimes(1);
+      expect(persistAIInvestigationResult).toHaveBeenCalledTimes(1);
+      expect(routeAfterAIInvestigation).toHaveBeenCalledTimes(1);
     });
   });
 });

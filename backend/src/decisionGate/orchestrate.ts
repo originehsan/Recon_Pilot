@@ -11,6 +11,8 @@
 // derive it from routedCases alone without guessing or redundantly
 // recomputing the whole calibration pass.
 
+import mysql from 'mysql2/promise';
+import { getPool } from '../db/pool';
 import { RoutedCase } from '../matching/thresholdGate';
 import { Thresholds } from '../matching/calibrateThresholds';
 import { buildEvidenceBundle, EvidenceBundle } from '../aiInvestigation/evidenceBundle';
@@ -49,6 +51,43 @@ async function allSettlementsAlreadyResolved(settlements: Settlement[]): Promise
     }
   }
   return true;
+}
+
+/**
+ * True if ANY of the given match_candidate ids already has a PENDING
+ * review_queue row - i.e. a prior orchestration pass already routed this
+ * exact case to review and a human hasn't resolved/dismissed it yet.
+ *
+ * This is the fix for the gap allSettlementsAlreadyResolved's own comment
+ * above explicitly discloses: a case sitting in review_queue has no
+ * resolutions row, so without this second check it would silently get
+ * re-investigated on every subsequent pipeline run while pending - a real
+ * Gemini call spent again (wasted free-tier quota), a duplicate
+ * ai_investigations row, and a duplicate review_queue row, every single
+ * time. `status = 'pending'` specifically (not just "any row exists") so a
+ * case a human has already resolved or dismissed is correctly eligible for
+ * re-investigation if it somehow comes back around - only a still-open
+ * pending row should suppress re-investigation.
+ *
+ * ANY, not ALL: mirrors allSettlementsAlreadyResolved's own reasoning in
+ * spirit but inverted for the safer direction here - a multi-settlement
+ * ai_investigation case is always enqueued for review as one atomic group
+ * (routingPolicy.ts's enqueueGroupForReview loops over every settlement), so
+ * in practice every settlement in the case has a row or none do. If that
+ * ever somehow desynced, treating a partial match as "already pending" and
+ * skipping re-investigation is the safer failure mode - it never re-spends
+ * a Gemini call speculatively.
+ */
+async function anyAlreadyPendingReview(matchCandidateIds: number[]): Promise<boolean> {
+  if (matchCandidateIds.length === 0) {
+    return false;
+  }
+  const pool = getPool();
+  const [rows] = await pool.query<mysql.RowDataPacket[]>(
+    `SELECT 1 FROM review_queue WHERE match_candidate_id IN (?) AND status = 'pending' LIMIT 1`,
+    [matchCandidateIds],
+  );
+  return rows.length > 0;
 }
 
 export type InvestigateFn = (bundle: EvidenceBundle) => Promise<AIInvestigationResult>;
@@ -111,13 +150,20 @@ async function processCase(routedCase: RoutedCase, investigateFn: InvestigateFn,
   // Step 0.1 of the API-layer prompt: no resolution-status filtering exists
   // upstream), so without this check, POST /api/runs would re-investigate
   // every already-settled ai_investigation case again on every subsequent
-  // run. Note this only catches cases that reached a terminal resolution -
-  // a case still sitting in review_queue (never finalized) has no
-  // resolutions row yet and will still be re-investigated on the next run,
-  // which is a real, disclosed limitation, not something this check claims
-  // to solve.
+  // run.
   if (await allSettlementsAlreadyResolved(routedCase.settlements)) {
     return 'finalized';
+  }
+
+  // Second safety mechanism, covering the gap the check above does NOT: a
+  // case already sitting in review_queue (routed but not yet finalized -
+  // still awaiting a human) has no resolutions row, so allSettlementsAlready
+  // Resolved alone can't see it. Without this check it would be
+  // re-investigated - a real Gemini call, a new ai_investigations row, and a
+  // new review_queue row - on every subsequent run while it sits pending.
+  // See anyAlreadyPendingReview's own comment for the full reasoning.
+  if (await anyAlreadyPendingReview(matchCandidateIds)) {
+    return 'reviewed';
   }
 
   const { bundle, tokenToSettlementId } = buildEvidenceBundle(routedCase);

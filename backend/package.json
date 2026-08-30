@@ -14,7 +14,9 @@
     "verify-pipeline": "ts-node src/matching/verifyFullPipeline.ts",
     "verify-ai": "ts-node src/aiInvestigation/manualVerify.ts",
     "verify-decision-gate": "ts-node src/decisionGate/verifyDecisionGate.ts",
-    "verify-holdout": "ts-node src/matching/verifyHoldoutAccuracy.ts"
+    "verify-holdout": "ts-node src/matching/verifyHoldoutAccuracy.ts",
+    "verify-ablation": "ts-node src/decisionGate/verifyAblation.ts",
+    "verify-injection": "ts-node src/aiInvestigation/verifyPromptInjection.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
