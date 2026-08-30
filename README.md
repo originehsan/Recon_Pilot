@@ -70,7 +70,7 @@ ReconPilot's AI step uses Google Gemini's free tier, which allows about 5 reques
 - A reconciliation run reprocesses every currently-unresolved record in the database, not just the batch you just uploaded.
 - The review queue isn't scoped to a single run — it always shows every pending item across the whole system.
 - Split-payment detection only looks for 2-way and 3-way splits, not longer chains.
-- The matching thresholds are calibrated against a labeled synthetic dataset built for this demo, not real production data.
+- The matching thresholds are calibrated against a labeled synthetic dataset built for this demo, not real production data — though parameters are validated with a held-out 70/30 train/test split (data never used for estimation) to confirm the evaluation isn't circular. See `backend/src/matching/verifyHoldoutAccuracy.ts`.
 
 ---
 
