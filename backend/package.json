@@ -13,7 +13,8 @@
     "verify-matching": "ts-node src/matching/manualVerify.ts",
     "verify-pipeline": "ts-node src/matching/verifyFullPipeline.ts",
     "verify-ai": "ts-node src/aiInvestigation/manualVerify.ts",
-    "verify-decision-gate": "ts-node src/decisionGate/verifyDecisionGate.ts"
+    "verify-decision-gate": "ts-node src/decisionGate/verifyDecisionGate.ts",
+    "verify-holdout": "ts-node src/matching/verifyHoldoutAccuracy.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
