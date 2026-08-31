@@ -287,13 +287,16 @@ function ExceptionRow({ exception: ex, isExpanded, isFlashing, rowIndex, onToggl
           )}
         </td>
 
-        {/* Priority Score */}
+        {/* Priority — a de-emphasized, rounded value, never the dominant
+            number in the row: the row is already sorted by this exact score,
+            so position conveys relative urgency; this is supplementary detail
+            for whoever wants the underlying figure, not a headline number. */}
         <td className="px-5 py-3.5 text-right">
           <span
-            className="mono text-sm font-medium"
-            style={{ color: 'var(--color-text-secondary)' }}
+            className="mono text-xs"
+            style={{ color: 'var(--color-text-muted)' }}
           >
-            {formatDecimal(ex.priorityScore, 4)}
+            {formatDecimal(ex.priorityScore, 0)}
           </span>
         </td>
 
@@ -490,12 +493,12 @@ export function Exceptions() {
               <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
                 {[
                   { label: 'Reason', align: 'left' },
-                  // Right-aligned to match Priority Score - both are numeric
+                  // Right-aligned to match Priority - both are numeric
                   // columns, and Rule 3 (never left-align a number next to a
                   // label) applies to Exposure exactly as much as Priority.
                   { label: 'Exposure', align: 'right' },
                   { label: 'Narration', align: 'left' },
-                  { label: 'Priority Score', align: 'right' },
+                  { label: 'Priority', align: 'right' },
                   { label: '', align: 'right' },
                 ].map(({ label, align }) => (
                   <th

@@ -80,12 +80,21 @@ function RunStatusBadge({ status }: { status: string }) {
   );
 }
 
-// ─── Pie chart colors — MUST match DecisionSourceBadge semantics ──────────────
+// ─── Pie chart colors ───────────────────────────────────────────────────────
 // Note: GET /api/runs/:id progress does not expose per-decidedBy breakdown.
 // This chart shows RUN STATUS breakdown: Resolved / In Review / Failed.
-// Teal=resolved, Amber=reviewQueued, Red=failed — matching badge color semantics.
+//
+// 'Resolved' here is NOT the same thing DecisionSourceBadge's teal means -
+// it's every finalized case regardless of decidedBy (stage1_exact,
+// stage7_auto, AND post_ai all count), whereas teal is reserved specifically
+// for "deterministic, zero AI involvement" (see DecisionSourceBadge.tsx).
+// Using teal here previously conflated the two - fixed by using the success
+// token instead (positive-outcome green, not a decision-source color at all).
+// Amber=reviewQueued and Red=failed DO still match their single, consistent
+// meaning everywhere else (amber=human/pending, red=failed/error), so those
+// two are left as-is.
 const PIE_COLORS = {
-  resolved:     '#14B8A6',
+  resolved:     '#04db7c', // var(--color-success) - positive outcome, NOT a decision-source color
   reviewQueued: '#F59E0B',
   failed:       '#F87171',
 };
@@ -700,13 +709,23 @@ export function Dashboard() {
                 icon={Layers}
                 accentColor="gray"
               />
-              <StatCard
-                label="Resolved"
-                value={progress.resolved}
-                icon={CheckCircle2}
-                accentColor="success"
-                description="Finalized by gate"
-              />
+              {/* Resolved gets a subtle success-green ring - the one card
+                  that carries the headline "did this run succeed" signal,
+                  given slightly more visual weight than its four siblings.
+                  Achieved with a wrapper (not a StatCard prop) so StatCard's
+                  existing API stays untouched. */}
+              <div
+                className="rounded-md"
+                style={{ boxShadow: '0 0 0 1px var(--color-success-border)' }}
+              >
+                <StatCard
+                  label="Resolved"
+                  value={progress.resolved}
+                  icon={CheckCircle2}
+                  accentColor="success"
+                  description="Finalized by gate"
+                />
+              </div>
               <StatCard
                 label="In Review"
                 value={progress.reviewQueued}
@@ -929,7 +948,7 @@ export function Dashboard() {
                       {formatPaise(ex.exposureAmount)}
                     </p>
                     <p className="text-xs mono" style={{ color: 'var(--color-text-muted)' }}>
-                      Priority: {formatDecimal(ex.priorityScore, 4)}
+                      Priority: {formatDecimal(ex.priorityScore, 0)}
                     </p>
                   </div>
                 </div>
