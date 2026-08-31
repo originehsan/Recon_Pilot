@@ -38,6 +38,7 @@ import { formatPaise, formatDecimal } from '../utils/format';
 function humanizeReasonCode(code: string): string {
   const MAP: Record<string, string> = {
     fs_score_in_review_band: 'Score in review band',
+    settlement_amount_does_not_reconcile_no_split_solution: 'Amount does not reconcile',
     ambiguous_duplicate: 'Ambiguous duplicate',
     split_payment_ambiguous: 'Split payment (ambiguous)',
     no_match_found: 'No match found',
@@ -723,7 +724,7 @@ export function Dashboard() {
                   value={progress.resolved}
                   icon={CheckCircle2}
                   accentColor="success"
-                  description="Finalized by gate"
+                  description="Finalized by the decision gate"
                 />
               </div>
               <StatCard
@@ -877,7 +878,7 @@ export function Dashboard() {
             icon={Play}
             title="No run started"
             message="Start a reconciliation run to see exceptions here."
-            action={{ label: 'Start a Run', onClick: handleStartRun }}
+            action={{ label: 'Start New Run', onClick: handleStartRun }}
           />
         ) : exceptionsLoading ? (
           // P1: inline skeleton for the recent-exceptions preview
@@ -917,7 +918,7 @@ export function Dashboard() {
           <EmptyState
             icon={CheckCircle2}
             title="No exceptions — all clear"
-            message="All cases were resolved deterministically or via AI investigation."
+            message="All cases were resolved by the decision gate, whether matched automatically or after AI investigation."
           />
         ) : (
           <div>
