@@ -30,23 +30,49 @@ ReconPilot automates the part that's safe to automate, and stays careful about t
 ## Execution pipeline
 
 ```mermaid
-flowchart LR
-    A[Settlement + order data] --> B[Normalize IDs]
-    B --> C[Exact match]
-    C -->|matched| G[Decision gate]
-    C -->|unmatched| D[Residual candidates]
-    D --> S[Split-payment check]
-    D --> L[String similarity]
-    S --> F[Fellegi-Sunter score]
+flowchart TD
+    A["Settlement + Order Data"] --> B["Normalize IDs"]
+    B --> C["Exact Match"]
+
+    C -->|Matched| G["Decision Gate"]
+    C -->|Unmatched| D["Residual Candidates"]
+
+    D --> S["Split-Payment Check"]
+    D --> L["String Similarity"]
+
+    S --> F["Fellegi-Sunter Score"]
     L --> F
-    F --> U[Ambiguity components]
-    U --> H[Hungarian assignment]
-    H --> T{Route}
-    T -->|auto-resolve| G
-    T -->|human review| R[Review queue]
-    T -->|ambiguous| I[AI investigation]
-    I -->|evidence only| G
-    G --> Au[Audit trail]
+
+    F --> U["Ambiguity Components"]
+    U --> H["Hungarian Assignment"]
+
+    H --> T{"Route"}
+
+    T -->|Auto-resolve| G
+    T -->|Human Review| R["Review Queue"]
+    T -->|Ambiguous| I["AI Investigation"]
+
+    I -->|Evidence Only| G
+
+    G --> Au["Audit Trail"]
+
+    classDef input fill:#1F6FEB,stroke:#58A6FF,color:#FFFFFF,stroke-width:2px;
+    classDef process fill:#21262D,stroke:#8B949E,color:#F0F6FC,stroke-width:2px;
+    classDef scoring fill:#3B2E63,stroke:#A371F7,color:#F0F6FC,stroke-width:2px;
+    classDef assignment fill:#462E6B,stroke:#BC8CFF,color:#FFFFFF,stroke-width:2px;
+    classDef decision fill:#5A4300,stroke:#D29922,color:#FFFFFF,stroke-width:2px;
+    classDef review fill:#5A1E25,stroke:#F85149,color:#FFFFFF,stroke-width:2px;
+    classDef ai fill:#123F2A,stroke:#3FB950,color:#FFFFFF,stroke-width:2px;
+    classDef audit fill:#30363D,stroke:#8B949E,color:#FFFFFF,stroke-width:2px;
+
+    class A input;
+    class B,C,D,S,L process;
+    class F,U scoring;
+    class H assignment;
+    class G,T decision;
+    class R review;
+    class I ai;
+    class Au audit;
 ```
 When a settlement comes in, ReconPilot checks it against the order it should belong to:
 
