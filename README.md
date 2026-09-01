@@ -27,8 +27,27 @@ ReconPilot automates the part that's safe to automate, and stays careful about t
 
 ## How it works
 
-![ReconPilot pipeline flow](assets/images/reconpilot-pipeline-flow-detailed.svg)
+## Execution pipeline
 
+```mermaid
+flowchart LR
+    A[Settlement + order data] --> B[Normalize IDs]
+    B --> C[Exact match]
+    C -->|matched| G[Decision gate]
+    C -->|unmatched| D[Residual candidates]
+    D --> S[Split-payment check]
+    D --> L[String similarity]
+    S --> F[Fellegi-Sunter score]
+    L --> F
+    F --> U[Ambiguity components]
+    U --> H[Hungarian assignment]
+    H --> T{Route}
+    T -->|auto-resolve| G
+    T -->|human review| R[Review queue]
+    T -->|ambiguous| I[AI investigation]
+    I -->|evidence only| G
+    G --> Au[Audit trail]
+```
 When a settlement comes in, ReconPilot checks it against the order it should belong to:
 
 - **Amount and reference match exactly?** It's matched instantly — no AI, no human, just code.
