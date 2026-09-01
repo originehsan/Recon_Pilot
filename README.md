@@ -13,6 +13,12 @@ Verified against the live database, not cherry-picked examples:
 
 Run `npm run verify-decision-gate` in backend/ to reproduce these numbers yourself.
 
+To check whether the AI step is actually worth having, it was tested both ways: with AI turned on, and with AI turned off (leaving those cases for manual review instead). Turning AI on resolved 18 more cases correctly, with no drop in accuracy — every one of those 18 was still verified correct against the known right answer. Without AI, those same 18 cases would have needed a person to check them by hand.
+
+## Safety check
+
+The AI step was also tested against a trick question: what happens if someone puts a fake instruction inside the transaction notes, hoping the AI will just follow it instead of actually checking the evidence? In a real test, the AI correctly ignored the fake instruction and made its decision based on the real evidence instead — and even then, its answer only became final after passing through the separate decision-gate check described above.
+
 ## Why this exists
 
 Settlement mismatches happen at any scale — a slightly different transaction reference, a payment split across two transfers, a retry after a timeout. Someone always has to work out which records are genuine matches and which need a closer look before money gets marked as reconciled. Getting this wrong either means real money is misallocated, or a finance team wastes hours manually checking things a computer could resolve in milliseconds.
